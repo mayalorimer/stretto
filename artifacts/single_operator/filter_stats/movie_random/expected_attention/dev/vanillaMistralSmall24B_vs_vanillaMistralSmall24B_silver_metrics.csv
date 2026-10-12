@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaMistralSmall24B,{reviews.reviewtext} is clearly positive,1.0,1.0,1.0,22.30300784111044,0.0,22.30300784111044,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} is clearly negative,1.0,1.0,1.0,22.106102705002133,0.0,22.106102705002133,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} mentions excellent acting,1.0,1.0,1.0,22.392777681350363,0.0,22.392777681350363,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} mentions poor plot,1.0,1.0,1.0,23.883459091186246,0.0,23.883459091186246,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} mentions great cinematography,1.0,1.0,1.0,23.841500520705697,0.0,23.841500520705697,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} mentions terrible dialogue,1.0,1.0,1.0,23.652296066284467,0.0,23.652296066284467,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} is a rave review,1.0,1.0,1.0,23.846353292465096,0.0,23.846353292465096,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} is a scathing review,1.0,1.0,1.0,23.863235473632997,0.0,23.863235473632997,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} praises the soundtrack,1.0,1.0,1.0,23.655578374863097,0.0,23.655578374863097,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaMistralSmall24B,{reviews.reviewtext} criticizes the special effects,1.0,1.0,1.0,23.85679149627716,0.0,23.85679149627716,0.0,0.0,0.0,1400.0,0.0,1400.0

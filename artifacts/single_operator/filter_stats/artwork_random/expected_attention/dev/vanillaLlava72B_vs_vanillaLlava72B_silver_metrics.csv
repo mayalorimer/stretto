@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaLlava72B,{artworks.image} depicts a religous scene,1.0,1.0,1.0,172.93490743637085,0.0,172.93490743637085,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} depicts more than two people,1.0,1.0,1.0,171.71395325660706,0.0,171.71395325660706,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} depicts an interior scene with architectural elements,1.0,1.0,1.0,172.06048917770386,0.0,172.06048917770386,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} depicts a nighttime scene,1.0,1.0,1.0,172.40733742713928,0.0,172.40733742713928,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} depicts a figure in prayer,1.0,1.0,1.0,172.168683052063,0.0,172.168683052063,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} shows a figure holding a book or scroll,1.0,1.0,1.0,173.7247667312622,0.0,173.7247667312622,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} shows a figure with a visible halo or radiance,1.0,1.0,1.0,172.15787887573242,0.0,172.15787887573242,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} depicts a royal or noble figure wearing a crown,1.0,1.0,1.0,174.32364916801453,0.0,174.32364916801453,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} depicts saints identifiable by their halos,1.0,1.0,1.0,172.87399792671204,0.0,172.87399792671204,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,{artworks.image} depicts a mythological figure identifiable by attributes,1.0,1.0,1.0,171.76848578453064,0.0,171.76848578453064,0.0,0.0,0.0,91.0,0.0,91.0

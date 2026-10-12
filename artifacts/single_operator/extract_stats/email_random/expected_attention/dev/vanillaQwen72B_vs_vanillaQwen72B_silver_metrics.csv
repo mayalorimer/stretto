@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaQwen72B,Extract the [sender] from {emails.text},1.0,1.0,1.0,1860.5876812934935,0.0,1860.5876812934935,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,Extract the first [recipient] from {emails.text},1.0,1.0,1.0,1964.8189811706634,0.0,1964.8189811706634,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,Extract the [date] from {emails.text},1.0,1.0,1.0,3346.149590730717,0.0,3346.149590730717,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,Extract the [subject] from {emails.text},1.0,1.0,1.0,2200.012575387976,0.0,2200.012575387976,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,"Classify the [urgency_level] from {emails.text} (categories: high, medium, low)",1.0,1.0,1.0,1417.348728418351,0.0,1417.348728418351,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,"Classify the [sentiment] from {emails.text} (categories: positive, negative, neutral)",1.0,1.0,1.0,1414.341992139799,0.0,1414.341992139799,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,"Classify the [topic] from {emails.text} (categories: finance, legal, personal, other)",1.0,1.0,1.0,1469.4285612106241,0.0,1469.4285612106241,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,Extract the [number of attachments] from {emails.text},1.0,1.0,1.0,1404.0353190898884,0.0,1404.0353190898884,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,Classify if {emails.text} contains a [request_for_action] (yes/no),1.0,1.0,1.0,1399.6573412418552,0.0,1399.6573412418552,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,"Classify the [confidentiality_level] from {emails.text} (categories: public, internal, confidential)",1.0,1.0,1.0,1388.0183761119742,0.0,1388.0183761119742,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999

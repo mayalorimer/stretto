@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvLlava72B05,{artworks.image} depicts a religous scene,0.98,1.0,0.98989898989899,68.61236190795898,0.0,68.61236190795898,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} depicts more than two people,1.0,0.9142857142857143,0.955223880597015,73.43608522415161,0.0,73.43608522415161,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} depicts an interior scene with architectural elements,0.9411764705882353,0.9411764705882353,0.9411764705882353,74.18569350242615,0.0,74.18569350242615,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} depicts a nighttime scene,1.0,0.8,0.888888888888889,73.02432131767273,0.0,73.02432131767273,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} depicts a figure in prayer,0.8888888888888888,0.9230769230769231,0.9056603773584906,74.18402075767517,0.0,74.18402075767517,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} shows a figure holding a book or scroll,0.8888888888888888,0.42105263157894735,0.5714285714285714,73.54239869117737,0.0,73.54239869117737,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} shows a figure with a visible halo or radiance,0.8235294117647058,0.9655172413793104,0.888888888888889,75.12367224693298,0.0,75.12367224693298,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} depicts a royal or noble figure wearing a crown,1.0,0.84375,0.9152542372881356,72.77297377586365,0.0,72.77297377586365,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} depicts saints identifiable by their halos,0.7058823529411765,1.0,0.8275862068965517,76.6777982711792,0.0,76.6777982711792,0.0,0.0,0.0,71.5,0.0,71.5
+kvLlava72B05,{artworks.image} depicts a mythological figure identifiable by attributes,1.0,0.8269230769230769,0.9052631578947368,73.01219987869263,0.0,73.01219987869263,0.0,0.0,0.0,71.5,0.0,71.5

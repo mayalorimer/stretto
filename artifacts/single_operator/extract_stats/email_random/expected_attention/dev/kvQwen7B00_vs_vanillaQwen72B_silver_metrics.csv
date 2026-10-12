@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvQwen7B00,Extract the [sender] from {emails.text},0.4095904095904096,0.4095904095904096,0.4095904095904096,99.79587483406183,0.0,99.79587483406183,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,Extract the first [recipient] from {emails.text},0.3246753246753247,0.3246753246753247,0.3246753246753247,108.80749583244102,0.0,108.80749583244102,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,Extract the [date] from {emails.text},1.0,1.0,1.0,172.15779852866999,0.0,172.15779852866999,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,Extract the [subject] from {emails.text},0.8081918081918081,0.8081918081918081,0.8081918081918081,141.90059971809478,0.0,141.90059971809478,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,"Classify the [urgency_level] from {emails.text} (categories: high, medium, low)",0.4095904095904096,0.4095904095904096,0.4095904095904096,51.254142522810945,0.0,51.254142522810945,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,"Classify the [sentiment] from {emails.text} (categories: positive, negative, neutral)",0.7992007992007992,0.7992007992007992,0.7992007992007992,47.67184591293337,0.0,47.67184591293337,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,"Classify the [topic] from {emails.text} (categories: finance, legal, personal, other)",0.7182817182817183,0.7182817182817183,0.7182817182817183,54.02802062034508,0.0,54.02802062034508,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,Extract the [number of attachments] from {emails.text},0.9460539460539461,0.9460539460539461,0.9460539460539461,55.10423398017987,0.0,55.10423398017987,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,Classify if {emails.text} contains a [request_for_action] (yes/no),0.7972027972027972,0.7972027972027972,0.7972027972027973,51.25660991668665,0.0,51.25660991668665,0.0,0.0,0.0,900.9,0.0,900.9
+kvQwen7B00,"Classify the [confidentiality_level] from {emails.text} (categories: public, internal, confidential)",0.7102897102897103,0.7102897102897103,0.7102897102897103,57.41114902496492,0.0,57.41114902496492,0.0,0.0,0.0,900.9,0.0,900.9

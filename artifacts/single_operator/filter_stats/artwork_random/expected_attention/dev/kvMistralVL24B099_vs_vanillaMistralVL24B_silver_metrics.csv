@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvMistralVL24B099,{artworks.image} depicts a religous scene,1.0,0.8205128205128205,0.9014084507042254,11.693889141082764,0.0,11.693889141082764,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} depicts more than two people,1.0,0.5,0.6666666666666666,11.833585262298584,0.0,11.833585262298584,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} depicts an interior scene with architectural elements,0.8333333333333334,0.25,0.3846153846153846,11.718442678451538,0.0,11.718442678451538,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} depicts a nighttime scene,0.0,0.0,0.0,10.130414724349976,0.0,10.130414724349976,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} depicts a figure in prayer,0.75,0.36,0.48648648648648657,10.30466604232788,0.0,10.30466604232788,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} shows a figure holding a book or scroll,0.8181818181818182,0.34615384615384615,0.4864864864864865,10.33713960647583,0.0,10.33713960647583,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} shows a figure with a visible halo or radiance,0.8823529411764706,0.5172413793103449,0.6521739130434783,11.631093502044678,0.0,11.631093502044678,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} depicts a royal or noble figure wearing a crown,0.5714285714285714,0.25,0.34782608695652173,11.78634786605835,0.0,11.78634786605835,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} depicts saints identifiable by their halos,1.0,0.1724137931034483,0.29411764705882354,11.961700677871704,0.0,11.961700677871704,0.0,0.0,0.0,33.15,0.0,33.15
+kvMistralVL24B099,{artworks.image} depicts a mythological figure identifiable by attributes,1.0,0.3333333333333333,0.5,10.380843877792358,0.0,10.380843877792358,0.0,0.0,0.0,33.15,0.0,33.15

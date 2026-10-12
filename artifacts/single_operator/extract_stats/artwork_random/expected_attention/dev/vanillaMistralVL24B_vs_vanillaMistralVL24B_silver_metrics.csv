@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaMistralVL24B,Extract the [century] from {artworks.inception},1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+vanillaMistralVL24B,Extract the number of people [num_people] depicted in {artworks.image},1.0,1.0,1.0,92.72491788864136,0.0,92.72491788864136,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,"What is the genre [estimated_genre] of each artwork in {artworks.image}? Choose from History Painting, Portraiture, Landscape, Still Life, Genre Painting, Animal Painting, Marine Art, Abstract Art, Impressionism, Expressionism, Surrealism, Cubism, Pop Art, Photorealism, Street Art.",1.0,1.0,1.0,90.47369337081909,0.0,90.47369337081909,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,"Extract the primary background color [background] of each artwork in {artworks.image}. Choose from Red, Blue, Yellow, Green, Orange, Purple, Black, White.",1.0,1.0,1.0,86.57845711708069,0.0,86.57845711708069,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,Extract the number of animals [num_animals] from {artworks.image},1.0,1.0,1.0,86.84078979492188,0.0,86.84078979492188,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,Extract the [gender] of the main character (male / female / undefined) from {artworks.image},1.0,1.0,1.0,87.89005637168884,0.0,87.89005637168884,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,"Extract the estimated historical period [period] depicted in {artworks.image} (e.g., Antiquity, Middle Ages, Renaissance, Baroque, Modern)",1.0,1.0,1.0,88.0107626914978,0.0,88.0107626914978,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,Extract the type of setting [setting_type] of {artworks.image} (interior / exterior / undefined),1.0,1.0,1.0,89.87269115447998,0.0,89.87269115447998,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,Extract the dominant emotion [dominant_emotion] expressed by the central figure in {artworks.image},1.0,1.0,1.0,87.5299654006958,0.0,87.5299654006958,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaMistralVL24B,Extract the number of visible halos [num_halos] in {artworks.image},1.0,1.0,1.0,90.29026889801025,0.0,90.29026889801025,0.0,0.0,0.0,91.0,0.0,91.0

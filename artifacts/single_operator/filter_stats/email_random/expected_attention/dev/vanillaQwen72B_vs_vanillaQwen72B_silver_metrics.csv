@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaQwen72B,"{emails.text} refers to a fraudulent scheme (i.e., 'Raptor', ...)",1.0,1.0,1.0,1407.0267715453954,0.0,1407.0267715453954,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} contains confidential information,1.0,1.0,1.0,1413.2957916259606,0.0,1413.2957916259606,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} is written in a formal tone,1.0,1.0,1.0,1394.8780152797713,0.0,1394.8780152797713,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} discusses financial matters,1.0,1.0,1.0,1396.7780072688927,0.0,1396.7780072688927,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} is addressed to multiple recipients,1.0,1.0,1.0,1387.6994421482264,0.0,1387.6994421482264,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} includes an attachment,1.0,1.0,1.0,1409.9212510585862,0.0,1409.9212510585862,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} was sent during business hours,1.0,1.0,1.0,1438.5182802677282,0.0,1438.5182802677282,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} contains a greeting,1.0,1.0,1.0,1410.9942965507757,0.0,1410.9942965507757,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} discusses legal issues,1.0,1.0,1.0,1403.2616567611396,0.0,1403.2616567611396,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaQwen72B,{emails.text} references a meeting or event,1.0,1.0,1.0,1392.9917855262472,0.0,1392.9917855262472,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999

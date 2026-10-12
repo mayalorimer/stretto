@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanilla70B,{reviews.reviewtext} is clearly positive,1.0,1.0,1.0,62.40604209899943,0.0,62.40604209899943,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} is clearly negative,1.0,1.0,1.0,62.051812648774295,0.0,62.051812648774295,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} mentions excellent acting,1.0,1.0,1.0,61.55690884590196,0.0,61.55690884590196,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} mentions poor plot,1.0,1.0,1.0,62.412951946257316,0.0,62.412951946257316,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} mentions great cinematography,1.0,1.0,1.0,62.173710823059636,0.0,62.173710823059636,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} mentions terrible dialogue,1.0,1.0,1.0,61.533230304718806,0.0,61.533230304718806,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} is a rave review,1.0,1.0,1.0,61.5127632617955,0.0,61.5127632617955,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} is a scathing review,1.0,1.0,1.0,61.456089735031235,0.0,61.456089735031235,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} praises the soundtrack,1.0,1.0,1.0,61.7672867774967,0.0,61.7672867774967,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,{reviews.reviewtext} criticizes the special effects,1.0,1.0,1.0,62.040741682051795,0.0,62.040741682051795,0.0,0.0,0.0,1400.0,0.0,1400.0

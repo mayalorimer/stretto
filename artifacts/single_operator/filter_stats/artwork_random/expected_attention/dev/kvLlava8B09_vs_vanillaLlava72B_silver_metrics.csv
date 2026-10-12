@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvLlava8B09,{artworks.image} depicts a religous scene,1.0,0.8163265306122449,0.898876404494382,10.020876407623291,0.0,10.020876407623291,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} depicts more than two people,1.0,0.8571428571428571,0.923076923076923,10.087360143661499,0.0,10.087360143661499,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} depicts an interior scene with architectural elements,1.0,0.058823529411764705,0.1111111111111111,9.02284574508667,0.0,9.02284574508667,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} depicts a nighttime scene,0.0,0.0,0.0,8.891557931900024,0.0,8.891557931900024,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} depicts a figure in prayer,0.8461538461538461,0.4230769230769231,0.5641025641025641,10.038393259048462,0.0,10.038393259048462,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} shows a figure holding a book or scroll,0.0,0.0,0.0,8.873828649520874,0.0,8.873828649520874,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} shows a figure with a visible halo or radiance,1.0,0.10344827586206896,0.1875,10.07528281211853,0.0,10.07528281211853,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} depicts a royal or noble figure wearing a crown,0.8181818181818182,0.28125,0.41860465116279066,10.176791906356812,0.0,10.176791906356812,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} depicts saints identifiable by their halos,0.8421052631578947,0.6666666666666666,0.744186046511628,9.081160068511963,0.0,9.081160068511963,0.0,0.0,0.0,6.5,0.0,6.5
+kvLlava8B09,{artworks.image} depicts a mythological figure identifiable by attributes,1.0,0.2692307692307692,0.42424242424242425,8.879338502883911,0.0,8.879338502883911,0.0,0.0,0.0,6.5,0.0,6.5

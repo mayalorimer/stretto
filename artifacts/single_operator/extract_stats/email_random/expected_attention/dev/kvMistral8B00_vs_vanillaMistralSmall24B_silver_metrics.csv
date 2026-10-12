@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvMistral8B00,Extract the [sender] from {emails.text},0.35364635364635366,0.35364635364635366,0.35364635364635366,313.2100932598136,0.0,313.2100932598136,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,Extract the first [recipient] from {emails.text},0.36363636363636365,0.36363636363636365,0.36363636363636365,333.7009167671182,0.0,333.7009167671182,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,Extract the [date] from {emails.text},1.0,1.0,1.0,600.8479890823379,0.0,600.8479890823379,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,Extract the [subject] from {emails.text},0.7652347652347652,0.7652347652347652,0.7652347652347652,392.1234009265959,0.0,392.1234009265959,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,"Classify the [urgency_level] from {emails.text} (categories: high, medium, low)",0.4255744255744256,0.4255744255744256,0.4255744255744256,236.8192329406761,0.0,236.8192329406761,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,"Classify the [sentiment] from {emails.text} (categories: positive, negative, neutral)",0.7712287712287712,0.7712287712287712,0.7712287712287712,213.48538899421345,0.0,213.48538899421345,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,"Classify the [topic] from {emails.text} (categories: finance, legal, personal, other)",0.6083916083916084,0.6083916083916084,0.6083916083916084,244.73304009437973,0.0,244.73304009437973,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,Extract the [number of attachments] from {emails.text},0.9250749250749251,0.9250749250749251,0.9250749250749251,336.80323457718777,0.0,336.80323457718777,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,Classify if {emails.text} contains a [request_for_action] (yes/no),0.8181818181818182,0.8181818181818182,0.8181818181818182,234.06369733810303,0.0,234.06369733810303,0.0,0.0,0.0,900.9,0.0,900.9
+kvMistral8B00,"Classify the [confidentiality_level] from {emails.text} (categories: public, internal, confidential)",0.8301698301698301,0.8301698301698301,0.8301698301698301,217.80901694297998,0.0,217.80901694297998,0.0,0.0,0.0,900.9,0.0,900.9

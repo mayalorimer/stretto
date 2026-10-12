@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kv70B06,Extract the [sender] from {emails.text},0.672,0.672,0.672,473.63666987418225,0.0,473.63666987418225,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,Extract the first [recipient] from {emails.text},0.402,0.402,0.402,491.4858503341743,0.0,491.4858503341743,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,Extract the [date] from {emails.text},1.0,1.0,1.0,780.1828415393854,0.0,780.1828415393854,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,Extract the [subject] from {emails.text},0.681,0.681,0.681,664.0824987888413,0.0,664.0824987888413,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,"Classify the [urgency_level] from {emails.text} (categories: high, medium, low)",0.892,0.892,0.892,181.77813982963795,0.0,181.77813982963795,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,"Classify the [sentiment] from {emails.text} (categories: positive, negative, neutral)",0.898,0.898,0.898,182.15563869476142,0.0,182.15563869476142,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,"Classify the [topic] from {emails.text} (categories: finance, legal, personal, other)",0.927,0.927,0.927,182.99213743210078,0.0,182.99213743210078,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,Extract the [number of attachments] from {emails.text},0.958,0.958,0.958,181.1345415115378,0.0,181.1345415115378,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,Classify if {emails.text} contains a [request_for_action] (yes/no),0.93,0.93,0.93,182.25078201294122,0.0,182.25078201294122,0.0,0.0,0.0,950.0,0.0,950.0
+kv70B06,"Classify the [confidentiality_level] from {emails.text} (categories: public, internal, confidential)",0.862,0.862,0.8619999999999999,185.3694121837651,0.0,185.3694121837651,0.0,0.0,0.0,950.0,0.0,950.0

@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvMistral8B05,Extract the [sender] from {emails.text},0.3006993006993007,0.3006993006993007,0.3006993006993007,174.8677906990027,0.0,174.8677906990027,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,Extract the first [recipient] from {emails.text},0.33466533466533466,0.33466533466533466,0.33466533466533466,201.94869947433213,0.0,201.94869947433213,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,Extract the [date] from {emails.text},1.0,1.0,1.0,339.1759798526738,0.0,339.1759798526738,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,Extract the [subject] from {emails.text},0.6233766233766234,0.6233766233766234,0.6233766233766234,240.26171064376686,0.0,240.26171064376686,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,"Classify the [urgency_level] from {emails.text} (categories: high, medium, low)",0.4435564435564436,0.4435564435564436,0.4435564435564436,124.8864872455619,0.0,124.8864872455619,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,"Classify the [sentiment] from {emails.text} (categories: positive, negative, neutral)",0.7622377622377622,0.7622377622377622,0.7622377622377621,98.41423439979656,0.0,98.41423439979656,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,"Classify the [topic] from {emails.text} (categories: finance, legal, personal, other)",0.5764235764235764,0.5764235764235764,0.5764235764235764,140.30900096893163,0.0,140.30900096893163,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,Extract the [number of attachments] from {emails.text},0.9100899100899101,0.9100899100899101,0.9100899100899101,173.6545517444575,0.0,173.6545517444575,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,Classify if {emails.text} contains a [request_for_action] (yes/no),0.7962037962037962,0.7962037962037962,0.7962037962037963,85.1165847778335,0.0,85.1165847778335,0.0,0.0,0.0,600.6,0.0,600.6
+kvMistral8B05,"Classify the [confidentiality_level] from {emails.text} (categories: public, internal, confidential)",0.8191808191808192,0.8191808191808192,0.8191808191808192,78.1667349338547,0.0,78.1667349338547,0.0,0.0,0.0,600.6,0.0,600.6

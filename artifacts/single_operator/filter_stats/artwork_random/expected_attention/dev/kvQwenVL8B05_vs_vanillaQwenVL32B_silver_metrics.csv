@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvQwenVL8B05,{artworks.image} depicts a religous scene,0.9761904761904762,0.8723404255319149,0.9213483146067415,10.330365419387817,0.0,10.330365419387817,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} depicts more than two people,1.0,0.972972972972973,0.9863013698630138,11.998952627182007,0.0,11.998952627182007,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} depicts an interior scene with architectural elements,1.0,0.52,0.6842105263157895,11.777252435684204,0.0,11.777252435684204,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} depicts a nighttime scene,1.0,0.2,0.33333333333333337,13.379012823104858,0.0,13.379012823104858,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} depicts a figure in prayer,1.0,0.6818181818181818,0.8108108108108109,13.457458019256592,0.0,13.457458019256592,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} shows a figure holding a book or scroll,1.0,0.4444444444444444,0.6153846153846153,13.11893606185913,0.0,13.11893606185913,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} shows a figure with a visible halo or radiance,1.0,0.8484848484848485,0.9180327868852458,13.357581615447998,0.0,13.357581615447998,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} depicts a royal or noble figure wearing a crown,1.0,0.7647058823529411,0.8666666666666666,13.249819040298462,0.0,13.249819040298462,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} depicts saints identifiable by their halos,1.0,0.7333333333333333,0.846153846153846,12.125425815582275,0.0,12.125425815582275,0.0,0.0,0.0,39.0,0.0,39.0
+kvQwenVL8B05,{artworks.image} depicts a mythological figure identifiable by attributes,1.0,0.20833333333333334,0.3448275862068966,13.134525060653687,0.0,13.134525060653687,0.0,0.0,0.0,39.0,0.0,39.0

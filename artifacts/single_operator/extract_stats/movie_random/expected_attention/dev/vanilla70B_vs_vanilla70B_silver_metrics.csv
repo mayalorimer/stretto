@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanilla70B,Extract the [sentiment] of {reviews.reviewtext}? (positive or negative),1.0,1.0,1.0,72.95602130890043,0.0,72.95602130890043,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,Extract the movie [title] mentioned in {reviews.reviewtext},1.0,1.0,1.0,86.48766231537023,0.0,86.48766231537023,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,Extract one [actor] that is praised particularly in {reviews.reviewtext} (or 'none' if no actor is praised),1.0,1.0,1.0,82.35046410560432,0.0,82.35046410560432,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,"Extract one aspect of the movie that is [criticized] in {reviews.reviewtext} (choose from plot, acting, cinematography, soundtrack, special effects, dialogue, or 'none' if no aspect is criticized)",1.0,1.0,1.0,88.09017682075475,0.0,88.09017682075475,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,Extract whether the reviewer [would_recommend] the movie based on {reviews.reviewtext} (yes/no),1.0,1.0,1.0,72.36444520950366,0.0,72.36444520950366,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,"Extract the main [emotion] expressed by the reviewer in {reviews.reviewtext} (e.g., joy, disappointment, anger, excitement, confusion)",1.0,1.0,1.0,83.93693637847856,0.0,83.93693637847856,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,Extract the [director]'s name mentioned in {reviews.reviewtext} (or 'none' if not mentioned),1.0,1.0,1.0,82.21032166481153,0.0,82.21032166481153,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,Extract whether the review in {reviews.reviewtext} contains [spoilers] (yes/no),1.0,1.0,1.0,71.81546068191608,0.0,71.81546068191608,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,Extract whether the reviewer [compares] the movie to another film in {reviews.reviewtext} (yes/no),1.0,1.0,1.0,74.11691856384273,0.0,74.11691856384273,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanilla70B,"Extract the [target_audience] implied or stated in {reviews.reviewtext} (e.g., families, children, adults, fans of action, 'none')",1.0,1.0,1.0,90.27578639984009,0.0,90.27578639984009,0.0,0.0,0.0,1400.0,0.0,1400.0

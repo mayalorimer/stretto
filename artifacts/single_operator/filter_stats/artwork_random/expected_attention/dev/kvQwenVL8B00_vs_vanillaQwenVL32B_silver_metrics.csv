@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvQwenVL8B00,{artworks.image} depicts a religous scene,0.9761904761904762,0.8723404255319149,0.9213483146067415,15.379210710525513,0.0,15.379210710525513,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} depicts more than two people,1.0,0.972972972972973,0.9863013698630138,15.826550722122192,0.0,15.826550722122192,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} depicts an interior scene with architectural elements,1.0,0.56,0.717948717948718,15.590556859970093,0.0,15.590556859970093,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} depicts a nighttime scene,1.0,0.2,0.33333333333333337,15.086647033691406,0.0,15.086647033691406,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} depicts a figure in prayer,1.0,0.7727272727272727,0.8717948717948718,12.072793960571289,0.0,12.072793960571289,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} shows a figure holding a book or scroll,1.0,0.6111111111111112,0.7586206896551725,16.573122262954712,0.0,16.573122262954712,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} shows a figure with a visible halo or radiance,1.0,0.8484848484848485,0.9180327868852458,16.19301962852478,0.0,16.19301962852478,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} depicts a royal or noble figure wearing a crown,0.9230769230769231,0.7058823529411765,0.8000000000000002,14.904378414154053,0.0,14.904378414154053,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} depicts saints identifiable by their halos,1.0,0.7666666666666667,0.8679245283018869,13.445361137390137,0.0,13.445361137390137,0.0,0.0,0.0,58.5,0.0,58.5
+kvQwenVL8B00,{artworks.image} depicts a mythological figure identifiable by attributes,1.0,0.20833333333333334,0.3448275862068966,16.02941918373108,0.0,16.02941918373108,0.0,0.0,0.0,58.5,0.0,58.5

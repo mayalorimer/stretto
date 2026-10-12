@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaMistralSmall24B,"{emails.text} refers to a fraudulent scheme (i.e., 'Raptor', ...)",1.0,1.0,1.0,823.5001194477024,0.0,823.5001194477024,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} contains confidential information,1.0,1.0,1.0,804.9667832851458,0.0,804.9667832851458,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} is written in a formal tone,1.0,1.0,1.0,829.0284807681828,0.0,829.0284807681828,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} discusses financial matters,1.0,1.0,1.0,831.2391304970002,0.0,831.2391304970002,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} is addressed to multiple recipients,1.0,1.0,1.0,783.2514123916498,0.0,783.2514123916498,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} includes an attachment,1.0,1.0,1.0,787.7790448665471,0.0,787.7790448665471,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} was sent during business hours,1.0,1.0,1.0,791.0521788597295,0.0,791.0521788597295,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} contains a greeting,1.0,1.0,1.0,784.4470577240063,0.0,784.4470577240063,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} discusses legal issues,1.0,1.0,1.0,778.9211516380234,0.0,778.9211516380234,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,{emails.text} references a meeting or event,1.0,1.0,1.0,790.316863059981,0.0,790.316863059981,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999

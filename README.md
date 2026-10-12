@@ -182,8 +182,9 @@ narrowing flags such as `--benchmarks`, `--arms` and `--guarantees`; see
 
 This evaluates single operators in isolation (no query optimization) across KV
 compression ratios: Exp 2 and its Figure 6. The paper's results are in
-`artifacts/single_operator/`; pass `--output-dir` to the runners to write new ones
-elsewhere and `--results-dir` to `plot_quality_runtime.py` to plot them.
+`artifacts/single_operator/`. New runs write to `benchmark_results/` (change it with
+`--output-dir`), which is also where `plot_quality_runtime.py` reads unless given
+`--results-dir`.
 
 ```sh
 # 1. Caches for each model under test (generate_kv_cache_image.py for image benchmarks)
@@ -196,9 +197,13 @@ python reasondb/backends/kv_cache_text_qa_server.py --model-name meta-llama/Llam
 python reasondb/backends/kv_cache_text_qa_server.py --model-name meta-llama/Llama-3.1-8B-Instruct &
 bash scripts/start_servers_embedding_only.sh &
 
-# 3. Run (run_benchmark_single_operator_image.py for image benchmarks, e.g. artwork_random)
+# 3. Run filters (the default) and extracts; Figure 6 averages the two
+#    (run_benchmark_single_operator_image.py for image benchmarks, e.g. artwork_random)
+METHODS="kv70B03 kv70B06 kv70B08 kv8B00 kv8B05 kv8B08 vanilla70B"
 python scripts/run_benchmark_single_operator.py --benchmark movie_random \
-  --kv-methods kv70B03 kv70B06 kv70B08 vanilla70B --reference-method vanilla70B
+  --kv-methods $METHODS --reference-method vanilla70B
+python scripts/run_benchmark_single_operator.py --benchmark movie_random --only-extracts \
+  --kv-methods $METHODS --reference-method vanilla70B
 
 # 4. Plot
 python scripts/plot_quality_runtime.py --dataset movie --model llama
@@ -207,8 +212,10 @@ python scripts/plot_quality_runtime.py --dataset movie --model llama
 - `--kv-methods` names `kv<model><ratio>` (`kv70B05` = Llama-70B at ratio 0.5), or
   `vanilla<model>` for a full prefill without a stored cache. `--reference-method` is the
   method whose answers serve as labels and must be among `--kv-methods`.
-- `--only-extracts` / `--all-operators` evaluate extracts only / filters and extracts
-  (default: filters only).
+- A run evaluates filters (default) or, with `--only-extracts`, extracts, and writes
+  `filter_stats/` or `extract_stats/`; `plot_quality_runtime.py` reads both.
+  `--all-operators` evaluates both in one run but writes `all_stats/`, which the plot
+  does not read.
 - Other model families: `kvQwen72B`/`kvQwen7B`, `kvMistralSmall24B`/`kvMistral8B` (text),
   `kvLlava72B`/`kvLlava8B`, `kvQwenVL32B`/`kvQwenVL8B`, `kvMistralVL24B`/`kvMistralVL8B`
   (image); see `reasondb/config/model_registry.py`.

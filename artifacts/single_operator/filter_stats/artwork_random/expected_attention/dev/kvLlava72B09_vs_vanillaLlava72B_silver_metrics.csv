@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+kvLlava72B09,{artworks.image} depicts a religous scene,0.98,1.0,0.98989898989899,35.42893099784851,0.0,35.42893099784851,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} depicts more than two people,1.0,0.8857142857142857,0.9393939393939393,35.30411982536316,0.0,35.30411982536316,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} depicts an interior scene with architectural elements,0.9629629629629629,0.7647058823529411,0.8524590163934426,36.2768497467041,0.0,36.2768497467041,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} depicts a nighttime scene,0.8571428571428571,0.6,0.7058823529411764,33.86792182922363,0.0,33.86792182922363,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} depicts a figure in prayer,0.8260869565217391,0.7307692307692307,0.7755102040816326,36.188613414764404,0.0,36.188613414764404,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} shows a figure holding a book or scroll,0.6666666666666666,0.10526315789473684,0.18181818181818182,37.95231008529663,0.0,37.95231008529663,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} shows a figure with a visible halo or radiance,0.7575757575757576,0.8620689655172413,0.8064516129032258,35.17603373527527,0.0,35.17603373527527,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} depicts a royal or noble figure wearing a crown,0.9473684210526315,0.5625,0.7058823529411765,40.13062381744385,0.0,40.13062381744385,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} depicts saints identifiable by their halos,0.631578947368421,1.0,0.7741935483870968,37.34345769882202,0.0,37.34345769882202,0.0,0.0,0.0,39.0,0.0,39.0
+kvLlava72B09,{artworks.image} depicts a mythological figure identifiable by attributes,1.0,0.7115384615384616,0.8314606741573033,36.25247883796692,0.0,36.25247883796692,0.0,0.0,0.0,39.0,0.0,39.0

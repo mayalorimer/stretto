@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaMistralSmall24B,Extract the [sender] from {emails.text},1.0,1.0,1.0,1150.8350679874354,0.0,1150.8350679874354,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,Extract the first [recipient] from {emails.text},1.0,1.0,1.0,1165.5168054104072,0.0,1165.5168054104072,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,Extract the [date] from {emails.text},1.0,1.0,1.0,1965.0038733481908,0.0,1965.0038733481908,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,Extract the [subject] from {emails.text},1.0,1.0,1.0,1281.129424333585,0.0,1281.129424333585,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,"Classify the [urgency_level] from {emails.text} (categories: high, medium, low)",1.0,1.0,1.0,854.85597276687,0.0,854.85597276687,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,"Classify the [sentiment] from {emails.text} (categories: positive, negative, neutral)",1.0,1.0,1.0,819.879923820478,0.0,819.879923820478,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,"Classify the [topic] from {emails.text} (categories: finance, legal, personal, other)",1.0,1.0,1.0,808.2102189063947,0.0,808.2102189063947,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,Extract the [number of attachments] from {emails.text},1.0,1.0,1.0,811.5632052421709,0.0,811.5632052421709,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,Classify if {emails.text} contains a [request_for_action] (yes/no),1.0,1.0,1.0,845.816143989556,0.0,845.816143989556,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999
+vanillaMistralSmall24B,"Classify the [confidentiality_level] from {emails.text} (categories: public, internal, confidential)",1.0,1.0,1.0,827.3772914409482,0.0,827.3772914409482,0.0,0.0,0.0,1401.3999999999999,0.0,1401.3999999999999

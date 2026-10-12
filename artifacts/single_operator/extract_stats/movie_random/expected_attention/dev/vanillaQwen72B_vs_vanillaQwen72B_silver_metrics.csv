@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaQwen72B,Extract the [sentiment] of {reviews.reviewtext}? (positive or negative),1.0,1.0,1.0,270.41559076309187,0.0,270.41559076309187,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,Extract the movie [title] mentioned in {reviews.reviewtext},1.0,1.0,1.0,175.46292471885485,0.0,175.46292471885485,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,Extract one [actor] that is praised particularly in {reviews.reviewtext} (or 'none' if no actor is praised),1.0,1.0,1.0,88.6497120857249,0.0,88.6497120857249,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,"Extract one aspect of the movie that is [criticized] in {reviews.reviewtext} (choose from plot, acting, cinematography, soundtrack, special effects, dialogue, or 'none' if no aspect is criticized)",1.0,1.0,1.0,93.18668961525029,0.0,93.18668961525029,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,Extract whether the reviewer [would_recommend] the movie based on {reviews.reviewtext} (yes/no),1.0,1.0,1.0,76.71056056022685,0.0,76.71056056022685,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,"Extract the main [emotion] expressed by the reviewer in {reviews.reviewtext} (e.g., joy, disappointment, anger, excitement, confusion)",1.0,1.0,1.0,107.28427314758122,0.0,107.28427314758122,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,Extract the [director]'s name mentioned in {reviews.reviewtext} (or 'none' if not mentioned),1.0,1.0,1.0,106.53324294090261,0.0,106.53324294090261,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,Extract whether the review in {reviews.reviewtext} contains [spoilers] (yes/no),1.0,1.0,1.0,76.11313390731695,0.0,76.11313390731695,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,Extract whether the reviewer [compares] the movie to another film in {reviews.reviewtext} (yes/no),1.0,1.0,1.0,83.3486890792831,0.0,83.3486890792831,0.0,0.0,0.0,1400.0,0.0,1400.0
+vanillaQwen72B,"Extract the [target_audience] implied or stated in {reviews.reviewtext} (e.g., families, children, adults, fans of action, 'none')",1.0,1.0,1.0,107.1049921512621,0.0,107.1049921512621,0.0,0.0,0.0,1400.0,0.0,1400.0

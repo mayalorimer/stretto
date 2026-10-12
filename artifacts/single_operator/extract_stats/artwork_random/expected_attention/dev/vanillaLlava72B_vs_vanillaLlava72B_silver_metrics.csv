@@ -1,0 +1,11 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaLlava72B,Extract the [century] from {artworks.inception},1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+vanillaLlava72B,Extract the number of people [num_people] depicted in {artworks.image},1.0,1.0,1.0,178.6593894958496,0.0,178.6593894958496,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,"What is the genre [estimated_genre] of each artwork in {artworks.image}? Choose from History Painting, Portraiture, Landscape, Still Life, Genre Painting, Animal Painting, Marine Art, Abstract Art, Impressionism, Expressionism, Surrealism, Cubism, Pop Art, Photorealism, Street Art.",1.0,1.0,1.0,185.124694108963,0.0,185.124694108963,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,"Extract the primary background color [background] of each artwork in {artworks.image}. Choose from Red, Blue, Yellow, Green, Orange, Purple, Black, White.",1.0,1.0,1.0,176.33417129516602,0.0,176.33417129516602,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,Extract the number of animals [num_animals] from {artworks.image},1.0,1.0,1.0,176.16706943511963,0.0,176.16706943511963,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,Extract the [gender] of the main character (male / female / undefined) from {artworks.image},1.0,1.0,1.0,173.17708587646484,0.0,173.17708587646484,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,"Extract the estimated historical period [period] depicted in {artworks.image} (e.g., Antiquity, Middle Ages, Renaissance, Baroque, Modern)",1.0,1.0,1.0,189.58736753463745,0.0,189.58736753463745,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,Extract the type of setting [setting_type] of {artworks.image} (interior / exterior / undefined),1.0,1.0,1.0,182.39243698120117,0.0,182.39243698120117,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,Extract the dominant emotion [dominant_emotion] expressed by the central figure in {artworks.image},1.0,1.0,1.0,182.7632131576538,0.0,182.7632131576538,0.0,0.0,0.0,91.0,0.0,91.0
+vanillaLlava72B,Extract the number of visible halos [num_halos] in {artworks.image},1.0,1.0,1.0,171.29430985450745,0.0,171.29430985450745,0.0,0.0,0.0,91.0,0.0,91.0
