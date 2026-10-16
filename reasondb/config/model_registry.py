@@ -56,6 +56,20 @@ MODEL_SPECS = {
         "family": "qwen",
         "size_class": "large",
     },
+    "qwen7BUnsloth": {
+        "model_name": "unsloth/Qwen2.5-7B-Instruct-bnb-4bit",
+        "port": 5034,
+        "method_prefix": "kvQwen7BUnsloth",
+        "family": "qwen",
+        "size_class": "small",
+    },
+    "qwen3B": {
+        "model_name": "unsloth/Qwen2.5-3B-Instruct-bnb-4bit",
+        "port": 5036,
+        "method_prefix": "kvQwen3B",
+        "family": "qwen",
+        "size_class": "small",
+    },
     # Vision-language (VL) models — served by kv_cache_image_qa_server.py, not the
     # text server. LLaVA uses ports 5008/5009; the other VL models are even-spaced
     # from 5040 like the text families above.
