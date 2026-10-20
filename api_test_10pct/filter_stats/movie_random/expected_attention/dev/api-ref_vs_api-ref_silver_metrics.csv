@@ -1,0 +1,4 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+api-ref,{reviews.reviewtext} is clearly positive,1.0,1.0,1.0,78.26492230892183,0.0,78.26492230892183,0.00699795,0.0,0.00699795,0.0,0.0,0.0
+api-ref,{reviews.reviewtext} is clearly negative,1.0,1.0,1.0,74.67395565509797,0.0,74.67395565509797,0.00693825,0.0,0.00693825,0.0,0.0,0.0
+api-ref,{reviews.reviewtext} mentions excellent acting,1.0,1.0,1.0,73.41747567653657,0.0,73.41747567653657,0.006867750000000001,0.0,0.006867750000000001,0.0,0.0,0.0

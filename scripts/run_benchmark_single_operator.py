@@ -33,7 +33,7 @@ from reasondb.optimizer.label_optimizer import LabelOptimizer
 from reasondb.query_plan.logical_plan import ALL_LOGICAL_OPERATORS_TOOLBOX
 from reasondb.query_plan.physical_operator import CostType, PhysicalOperatorToolbox
 from reasondb.reasoning.few_shot_database import DUMMY_FEW_SHOT_DATABASE
-from reasondb.reasoning.llm import GPT4o, GPT4oMini
+from reasondb.reasoning.llm import GPT4o, GPT4oMini, GPT54Mini, GPT54Nano
 from reasondb.reasoning.reasoners.self_correction import SelfCorrectionReasoner
 from reasondb.evaluation.metrics.metrics_manager import MetricsManager
 from reasondb.operators.aggregate.aggregate import Aggregate
@@ -472,6 +472,46 @@ def make_vanilla_configurator(model_name: str):
     return configurator
 
 
+def make_api_configurator(model):
+    """Configurator for text operators backed by a direct language-model API."""
+    textqa_backend = LLMTextQABackend(model)
+    text_similarity_backend = TextSimilarityBackend("BAAI/bge-small-en-v1.5")
+    return PlanConfigurator(
+        llm=GPT4o(),
+        physical_operators=PhysicalOperatorToolbox(
+            join_operators=[TraditionalJoin(quality=1, fake_cost=0), QaFilterJoin()],
+            join_predicates=[
+                ExtractAndMatchFilter(
+                    textqa_backend,
+                    text_similarity_backend,
+                    fake_cost=0,
+                    quality=4,
+                ),
+                ExtractAndQaFilter(textqa_backend, fake_cost=0, quality=5),
+            ],
+            filter_operators=[
+                TraditionalFilter(quality=0, fake_cost=0),
+                # The single-operator benchmark executes the highest-quality
+                # candidate, so keep the API-backed filter above all alternatives.
+                TextQaFilter(textqa_backend, quality=15, fake_cost=0),
+            ],
+            extract_operators=[
+                TextQaExtract(textqa_backend, quality=5, fake_cost=0),
+                PythonExtract(LLMPythonCodegenBackend(GPT4o()), quality=2, fake_cost=0),
+            ],
+            transform_operators=[
+                PythonTransform(LLMPythonCodegenBackend(GPT4o()), quality=2, fake_cost=0)
+            ],
+            limit_operators=[Limit(quality=1, fake_cost=0)],
+            project_operators=[Project(quality=1, fake_cost=0)],
+            sorting_operators=[Sort(quality=1, fake_cost=0)],
+            groupby_operators=[GroupBy(quality=1, fake_cost=0)],
+            aggregate_operators=[Aggregate(quality=1, fake_cost=0)],
+            rename_operators=[Rename(quality=1, fake_cost=0)],
+        ),
+    )
+
+
 def main():
     logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser()
@@ -486,7 +526,7 @@ def main():
         kv_methods=[
             "kv8B09", "kv8B095", "kv8B099", "kv8B0995", "kv8B08", "kv8B07", "kv8B06", "kv8B05", "kv8B04", "kv8B03", "kv8B02", "kv8B00",
             "kv70B09", "kv70B095", "kv70B099", "kv70B0995", "kv70B08", "kv70B07", "kv70B06", "kv70B05", "kv70B04", "kv70B03", "kv70B02", "kv70B00",
-            "gpt"
+            "gpt", "api-ref", "api-test"
         ],
     )
     # --no_high_selectivity, --press-name, --reference-method, --sample, --range-filter and
@@ -568,7 +608,7 @@ def _run(args):
     benchmark_class = BENCHMARKS[benchmark_name]
     split = args.split
     print(f"Analyzing benchmark {benchmark_name} on split {split}...")
-    # benchmark = benchmark_class.load(split)
+    #benchmark = benchmark_class.load(split)
     benchmark = benchmark_class.load_without_queries(split)
     assert isinstance(benchmark, RandomBenchmark)
 
@@ -668,6 +708,10 @@ def _run(args):
         _spec = _registry.spec_by_key(_spec_key)
         _vanilla_name = "vanilla" + _spec.method_prefix.removeprefix("kv")
         method_configurators[_vanilla_name] = make_vanilla_configurator(_spec.model_name)
+
+    # Direct API variants: text-only operators backed by the requested OpenAI model.
+    method_configurators["api-ref"] = make_api_configurator(GPT54Mini())
+    method_configurators["api-test"] = make_api_configurator(GPT54Nano())
     
     # Collect predictions from KV-cache methods
     all_predictions = {}
