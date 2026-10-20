@@ -1,0 +1,56 @@
+{
+    "reviewsreviewtext_is_clearly_positive-": {
+        "cost": {
+            "execution_cost": {
+                "runtime": 252.97575139999984,
+                "monetary_cost": 0.0,
+                "fake_cost": 900.0
+            },
+            "tuning_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "component_times": {
+                "configuring": 12.099252194496103,
+                "tuning": 0.18104999199999838,
+                "execution": 253.5680003760001,
+                "end_to_end": 266.696191548496
+            },
+            "n_labels_requested": 0,
+            "guarantee": {}
+        },
+        "pipelines": [
+            "[]",
+            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-unsloth/Qwen2.5-3B-Instruct-bnb-4bit-cr0.0-vanilla\",\n        \"operator_config\": {\n            \"question_template\": \"Is the sentiment of this review clearly positive?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} is clearly positive\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+        ],
+        "data_filepath": "qwen_test_2pct/filter_stats/movie_random/expected_attention/dev/cache/vanillaQwen3B/vanillaQwen3B_5f218fa592a173745907bd88304ed19a4920b81dab20451de10dfc4ad643cd95.parquet"
+    },
+    "reviewsreviewtext_is_clearly_negative-": {
+        "cost": {
+            "execution_cost": {
+                "runtime": 251.25751161574811,
+                "monetary_cost": 0.0,
+                "fake_cost": 900.0
+            },
+            "tuning_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "component_times": {
+                "configuring": 18.123231871097232,
+                "tuning": 0.1753852019999158,
+                "execution": 251.87497522199988,
+                "end_to_end": 270.79182782409725
+            },
+            "n_labels_requested": 0,
+            "guarantee": {}
+        },
+        "pipelines": [
+            "[]",
+            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-unsloth/Qwen2.5-3B-Instruct-bnb-4bit-cr0.0-vanilla\",\n        \"operator_config\": {\n            \"question_template\": \"Is the sentiment of this review negative?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} is clearly negative\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+        ],
+        "data_filepath": "qwen_test_2pct/filter_stats/movie_random/expected_attention/dev/cache/vanillaQwen3B/vanillaQwen3B_a751140aaf8a5ddb6e65785631d23ffaf1de8171c90f5c9e9f393b80e0fb8ebe.parquet"
+    }
+}

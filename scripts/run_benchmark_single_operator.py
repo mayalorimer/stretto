@@ -568,7 +568,8 @@ def _run(args):
     benchmark_class = BENCHMARKS[benchmark_name]
     split = args.split
     print(f"Analyzing benchmark {benchmark_name} on split {split}...")
-    benchmark = benchmark_class.load(split)
+    #benchmark = benchmark_class.load(split)
+    benchmark = benchmark_class.load_without_queries(split)
     assert isinstance(benchmark, RandomBenchmark)
 
     if num_items is not None:

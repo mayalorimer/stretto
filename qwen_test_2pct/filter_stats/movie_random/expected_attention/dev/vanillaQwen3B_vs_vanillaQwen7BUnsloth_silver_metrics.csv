@@ -1,0 +1,3 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaQwen3B,{reviews.reviewtext} is clearly positive,0.9578454332552693,0.8592436974789915,0.9058693244739756,5.059515027999997,0.0,5.059515027999997,0.0,0.0,0.0,18.0,0.0,18.0
+vanillaQwen3B,{reviews.reviewtext} is clearly negative,0.9453781512605042,0.7475083056478405,0.8348794063079779,5.025150232314963,0.0,5.025150232314963,0.0,0.0,0.0,18.0,0.0,18.0
