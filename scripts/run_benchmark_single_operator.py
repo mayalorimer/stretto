@@ -474,6 +474,7 @@ def make_vanilla_configurator(model_name: str):
 
 def make_api_configurator(model):
     """Configurator for text operators backed by a direct language-model API."""
+    model.cache_enabled = False
     textqa_backend = LLMTextQABackend(model)
     text_similarity_backend = TextSimilarityBackend("BAAI/bge-small-en-v1.5")
     return PlanConfigurator(

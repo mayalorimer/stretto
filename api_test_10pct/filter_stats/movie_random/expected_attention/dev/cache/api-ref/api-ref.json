@@ -2,8 +2,8 @@
     "reviewsreviewtext_is_clearly_positive-": {
         "cost": {
             "execution_cost": {
-                "runtime": 782.6492230892181,
-                "monetary_cost": 0.0699795,
+                "runtime": 701.8235738277435,
+                "monetary_cost": 0.0684315,
                 "fake_cost": 0.0
             },
             "tuning_cost": {
@@ -12,25 +12,25 @@
                 "fake_cost": 0.0
             },
             "component_times": {
-                "configuring": 12.75093136999999,
-                "tuning": 0.13323496199996043,
-                "execution": 47.977734170398435,
-                "end_to_end": 61.5824039433985
+                "configuring": 9.675589843999887,
+                "tuning": 0.19705948599994372,
+                "execution": 36.44885078100015,
+                "end_to_end": 48.07216104700001
             },
             "n_labels_requested": 0,
             "guarantee": {}
         },
         "pipelines": [
             "[]",
-            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-gpt-5.4-mini-2026-03-17\",\n        \"operator_config\": {\n            \"question_template\": \"Is the sentiment of this review clearly positive?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} is clearly positive\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-gpt-5.4-mini-2026-03-17\",\n        \"operator_config\": {\n            \"question_template\": \"Is this review clearly positive?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} is clearly positive\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
         ],
         "data_filepath": "api_test_10pct/filter_stats/movie_random/expected_attention/dev/cache/api-ref/api-ref_5f218fa592a173745907bd88304ed19a4920b81dab20451de10dfc4ad643cd95.parquet"
     },
     "reviewsreviewtext_is_clearly_negative-": {
         "cost": {
             "execution_cost": {
-                "runtime": 746.7395565509796,
-                "monetary_cost": 0.0693825,
+                "runtime": 675.8061053752899,
+                "monetary_cost": 0.0681615,
                 "fake_cost": 0.0
             },
             "tuning_cost": {
@@ -39,25 +39,25 @@
                 "fake_cost": 0.0
             },
             "component_times": {
-                "configuring": 11.080674695666858,
-                "tuning": 0.12618993299997783,
-                "execution": 47.99651809122042,
-                "end_to_end": 59.71070877488728
+                "configuring": 9.600463663000028,
+                "tuning": 0.1924374299999272,
+                "execution": 34.96610564600019,
+                "end_to_end": 45.610702603999925
             },
             "n_labels_requested": 0,
             "guarantee": {}
         },
         "pipelines": [
             "[]",
-            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-gpt-5.4-mini-2026-03-17\",\n        \"operator_config\": {\n            \"question_template\": \"Is the sentiment of this review negative?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} is clearly negative\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-gpt-5.4-mini-2026-03-17\",\n        \"operator_config\": {\n            \"question_template\": \"Is this review clearly negative?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} is clearly negative\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
         ],
         "data_filepath": "api_test_10pct/filter_stats/movie_random/expected_attention/dev/cache/api-ref/api-ref_a751140aaf8a5ddb6e65785631d23ffaf1de8171c90f5c9e9f393b80e0fb8ebe.parquet"
     },
     "reviewsreviewtext_mentions_excellent_acting-": {
         "cost": {
             "execution_cost": {
-                "runtime": 734.1747567653656,
-                "monetary_cost": 0.0686775,
+                "runtime": 657.1585342884064,
+                "monetary_cost": 0.0687585,
                 "fake_cost": 0.0
             },
             "tuning_cost": {
@@ -66,17 +66,17 @@
                 "fake_cost": 0.0
             },
             "component_times": {
-                "configuring": 24.54611315476086,
-                "tuning": 0.24198954300004516,
-                "execution": 57.266034265798,
-                "end_to_end": 82.61445402355866
+                "configuring": 8.708833726999956,
+                "tuning": 0.36302476399987427,
+                "execution": 34.212474661000215,
+                "end_to_end": 44.16718277700011
             },
             "n_labels_requested": 0,
             "guarantee": {}
         },
         "pipelines": [
             "[]",
-            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-gpt-5.4-mini-2026-03-17\",\n        \"operator_config\": {\n            \"question_template\": \"Does the text mention excellent acting?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} mentions excellent acting\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+            "[\n    {\n        \"operator\": \"TextQaFilter-LLMTextQABackend-gpt-5.4-mini-2026-03-17\",\n        \"operator_config\": {\n            \"question_template\": \"Does this review mention excellent acting?\",\n            \"context\": \"reviews.reviewtext\",\n            \"keep_answer\": \"yes\",\n            \"__expression__\": \"{reviews.reviewtext} mentions excellent acting\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"output\"\n    }\n]"
         ],
         "data_filepath": "api_test_10pct/filter_stats/movie_random/expected_attention/dev/cache/api-ref/api-ref_3797c8f7216f02bdf359b9484cc05cd4a4a2e4633728a66c4489f234dddbaa1f.parquet"
     }
