@@ -132,6 +132,7 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
         self,
         model_name,
         device_id: int,
+        device: str = "auto",
         compression_ratios=(0.0, 0.3, 0.4, 0.5, 0.6, 0.8, 0.9, 0.99),
         batch_sizes=None,
         press_name="expected_attention",
@@ -139,6 +140,9 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
         use_relative_indices=False,
     ):
         self.device_id = device_id
+        if device not in ("auto", "cpu", "cuda"):
+            raise ValueError(f"Unsupported device '{device}'; expected auto, cpu, or cuda")
+        self.requested_device = device
         self.compression_ratios = compression_ratios
         batch_sizes = batch_sizes or (None,) * len(compression_ratios)
         self.compression_ratio_to_batch_size = {
@@ -801,7 +805,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
                 else actual_context_ids_length
             )
             del full_cache
-            torch.cuda.empty_cache()
+            if self.use_cuda:
+                torch.cuda.empty_cache()
 
             # ---- 5. Save scores (once, CR-independent) ----
             if (
@@ -1110,7 +1115,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
             )
 
             del full_cache
-            torch.cuda.empty_cache()
+            if self.use_cuda:
+                torch.cuda.empty_cache()
 
         except StopIteration as e:
             logger.error("StopIteration escaped coroutine", exc_info=True)
@@ -1214,7 +1220,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
             )
         finally:
             del full_cache
-            torch.cuda.empty_cache()
+            if self.use_cuda:
+                torch.cuda.empty_cache()
 
     async def prepare_indices_relative(
         self,
@@ -1344,8 +1351,30 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
         """Initialize the text model pipeline and compression settings."""
         logger.info("Setting up KV Cache Text Filter...")
 
-        # Set up device
-        self.device = f"cuda:{self.device_id}" if torch.cuda.is_available() else "cpu"
+        # Set up device. Explicit CPU mode prevents Transformers from selecting Apple MPS.
+        if self.requested_device == "cpu":
+            self.use_cuda = False
+            self.device = "cpu"
+        elif self.requested_device == "cuda":
+            if not torch.cuda.is_available():
+                raise RuntimeError("--device cuda was requested, but CUDA is unavailable")
+            self.use_cuda = True
+            self.device = f"cuda:{self.device_id}"
+        else:
+            self.use_cuda = torch.cuda.is_available()
+            self.device = f"cuda:{self.device_id}" if self.use_cuda else "cpu"
+
+        pipeline_kwargs = (
+            {
+                "device_map": {"": "cpu"},
+                "torch_dtype": torch.float32,
+            }
+            if not self.use_cuda
+            else {
+                "device_map": "auto",
+                "torch_dtype": torch.bfloat16,
+            }
+        )
 
         # Initialize the pipeline
         args = [{"attn_implementation": "flash_attention_2"}, {}]
@@ -1355,8 +1384,7 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
                 self.pipe = pipeline(
                     "kv-press-text-generation",  # type: ignore
                     model=self.model_name,
-                    device_map="auto",
-                    torch_dtype=torch.bfloat16,
+                    **pipeline_kwargs,
                     model_kwargs=x,  # type: ignore
                 )
                 break
@@ -1367,6 +1395,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
                 )
 
         assert self.pipe is not None, "Failed to initialize the model pipeline."
+        if not self.use_cuda:
+            self.pipe.model.to("cpu")
         self.pipe.model.eval()
         self.tokenizer = self.pipe.tokenizer
         self.tokenizer.pad_token = self.pipe.tokenizer.eos_token
@@ -1460,7 +1490,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
         # layer_devices covers every parameter's device (embedding/lm_head included), not just
         # decoder layers (as in _get_max_batch_size), so a GPU that holds only the
         # embedding/lm_head (and few or no decoder layers) is still a bottleneck candidate.
-        torch.cuda.empty_cache()
+        if self.use_cuda:
+            torch.cuda.empty_cache()
         layer_devices = list({p.device for p in self.pipe.model.parameters()})
 
         logger.debug("layer_devices set: %s", sorted({str(d) for d in layer_devices}))
@@ -1570,7 +1601,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
         # Once per request, not per batch: batches reuse identical shapes, so per-batch
         # empty_cache only added a sync + cudaMalloc churn. The end-of-request release
         # keeps mem_get_info (used by the batch estimators) honest for the next request.
-        torch.cuda.empty_cache()
+        if self.use_cuda:
+            torch.cuda.empty_cache()
         _gpu, _min_free = gpu_snapshot(_peaks)
         return {
             "answers": answers,
@@ -2009,7 +2041,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
             batched_attention_mask = torch.cat(batch_attention_masks, dim=0)
 
             # Ensure all async GPU transfers are complete before touching the tensors
-            torch.cuda.synchronize()
+            if self.use_cuda:
+                torch.cuda.synchronize()
             total_route_time += time.perf_counter() - _route_t0
 
             # Batch the caches. Iterate layers by index and pull (keys, values) via the
@@ -2151,7 +2184,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
 
         prefetch_pool.shutdown(wait=False)
         # Once per request, not per batch (see _run_vanilla_inference for the rationale).
-        torch.cuda.empty_cache()
+        if self.use_cuda:
+            torch.cuda.empty_cache()
         total_elapsed = time.perf_counter() - _loop_t0
 
         n_caches = max(len(load_plans), 1)
@@ -2441,7 +2475,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
 
             # Cleanup
             del cache
-            torch.cuda.empty_cache()
+            if self.use_cuda:
+                torch.cuda.empty_cache()
 
         except Exception as e:
             logger.error(f"Error generating cache for text {cache_filename}: {str(e)}")
@@ -2630,7 +2665,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
         # estimator instead gets every parameter's device (embedding/lm_head included), as
         # in the non-join compressed path, so a GPU holding only non-decoder weight is still
         # a bottleneck candidate.
-        torch.cuda.empty_cache()
+        if self.use_cuda:
+            torch.cuda.empty_cache()
         estimator_layer_devices = list({p.device for p in self.pipe.model.parameters()})
 
         # Path A needs the decoder's rotary embedding (only inv_freq) to re-rotate kept keys.
@@ -2779,7 +2815,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
                     kc, vc = payload["kc"], payload["vc"]
                 caches.append((kc, vc))
                 context_lens.append(kc[0].shape[2])
-            torch.cuda.synchronize()
+            if self.use_cuda:
+                torch.cuda.synchronize()
             total_wall_time += time.perf_counter() - _wall_t0
 
             max_ctx = max(context_lens)
@@ -2997,7 +3034,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
             del batched_gpu_keys, batched_gpu_values
 
         # Once per request, not per batch (see _run_vanilla_inference for the rationale).
-        torch.cuda.empty_cache()
+        if self.use_cuda:
+            torch.cuda.empty_cache()
         pinned_note = ""
         _pin_hits = _pin_misses = _pin_held = None
         if keep_in_memory:
@@ -3121,7 +3159,8 @@ class KvTextQaModelWrapper(KVCachingBackendBase):
             del inputs, generated
 
         # Once per request, not per batch (see _run_vanilla_inference for the rationale).
-        torch.cuda.empty_cache()
+        if self.use_cuda:
+            torch.cuda.empty_cache()
         _gpu, _min_free = gpu_snapshot()
         return {
             "answers": answers,
@@ -3345,6 +3384,12 @@ if __name__ == "__main__":
         help="Device ID for GPU to use",
     )
     parser.add_argument(
+        "--device",
+        choices=("auto", "cpu", "cuda"),
+        default="auto",
+        help="Execution device. Use 'cpu' to prevent CUDA and Apple MPS usage.",
+    )
+    parser.add_argument(
         "--vanilla-batch-size",
         type=int,
         default=None,
@@ -3391,6 +3436,7 @@ if __name__ == "__main__":
     model_wrapper = KvTextQaModelWrapper(
         model_name,
         device_id,
+        device=args.device,
         batch_sizes=[None, None, None, None, None, None, None, None, None, None],
         compression_ratios=[
             0.0,

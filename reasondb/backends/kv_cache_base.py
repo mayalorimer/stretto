@@ -525,6 +525,13 @@ class KVCachingBackendBase:
         callers instead divide the per-item cost by num_gpus (the even layer-shard), so the
         budget is "_usable_free_gb(tightest GPU)" against "per-item cost / num_gpus".
         """
+        if not any(
+            getattr(device, "type", None) == "cuda" for device in layer_devices
+        ):
+            if _psutil is not None:
+                return _psutil.virtual_memory().available / 1e9
+            return 0.0
+
         unique_cuda_indices = sorted(
             {
                 d.index
