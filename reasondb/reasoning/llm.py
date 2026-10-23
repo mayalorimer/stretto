@@ -355,6 +355,38 @@ class GPT4oMini(OpenAILLM):
         )
 
 
+class GPT54Mini(OpenAILLM):
+    def __init__(self):
+        super().__init__(
+            model_id="gpt-5.4-mini-2026-03-17",
+            characteristics=LLMCharacteristics(
+                rpm=30_000,
+                tpm=150_000_000,
+                out_len=4096,
+                in_len=16_385,
+                in_cost=0.75,
+                out_cost=4.50,
+            ),
+            cache_enabled=True,
+        )
+
+
+class GPT54Nano(OpenAILLM):
+    def __init__(self):
+        super().__init__(
+            model_id="gpt-5.4-nano-2026-03-17",
+            characteristics=LLMCharacteristics(
+                rpm=30_000,
+                tpm=150_000_000,
+                out_len=4096,
+                in_len=16_385,
+                in_cost=0.20,
+                out_cost=1.25,
+            ),
+            cache_enabled=True,
+        )
+
+
 class GPT4o(OpenAILLM):
     def __init__(self):
         super().__init__(
