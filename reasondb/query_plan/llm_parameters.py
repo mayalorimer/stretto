@@ -218,7 +218,8 @@ class LLMParameter:
             for v in value:
                 self.dtype.validate(v, database, table=table)
         else:
-            self.dtype.validate
+            #self.dtype.validate
+            self.dtype.validate(value, database, table=table)
 
     def for_prompt(
         self, logical_plan_step: LogicalPlanStep, database_state: "IntermediateState"
@@ -564,21 +565,27 @@ class LlmParameterTemplate:
         return self.text
 
     def column_mentions(
-        self, table: Optional[VirtualTableIdentifier] = None
-    ) -> List[VirtualColumnIdentifier]:
-        placeholders = re.findall(r"{(.*?)}", self.text)
-        result = []
-        for placeholder in placeholders:
-            if "." in placeholder:
-                table_name, _ = placeholder.split(".")
-                assert table is None or table.table_name == table_name
-                result.append(VirtualColumnIdentifier(placeholder))
-            else:
-                assert table is not None
-                result.append(
-                    VirtualColumnIdentifier(f"{table.table_name}.{placeholder}")
-                )
-        return result
+            self, table: Optional[VirtualTableIdentifier] = None
+        ) -> List[VirtualColumnIdentifier]:
+            placeholders = re.findall(r"{(.*?)}", self.text)
+            result = []
+            for placeholder in placeholders:
+                if "." in placeholder:
+                    table_name, _ = placeholder.split(".")
+                    if table is not None and table.table_name != table_name:
+                        raise Mistake(
+                            f"Column {{{placeholder}}} in template {self.text} refers to table {table_name}, but the input table is {table.table_name}."
+                        )
+                    result.append(VirtualColumnIdentifier(placeholder))
+                else:
+                    if table is None:
+                        raise Mistake(
+                            f"Column {{{placeholder}}} in template {self.text} must include its table name, e.g. {{<table>.{placeholder}}}."
+                        )
+                    result.append(
+                        VirtualColumnIdentifier(f"{table.table_name}.{placeholder}")
+                    )
+            return result
 
     def insert_concrete_columns(self, database_state: "IntermediateState") -> str:
         text = self.text

@@ -43,6 +43,7 @@ if TYPE_CHECKING:
     )
 
 TEST_OUTPUT_LEN = 3
+MAX_CONFIGURE_RETRIES = 3
 
 
 def _label_operator_for(logical_step_type: Type[LogicalPlanStep]):
@@ -337,6 +338,7 @@ class PlanConfigurator:
         mistake: Optional[Mistake] = None
         prompt: Optional[Prompt] = None
         response: Optional[str] = None
+        num_mistakes = 0
         unoptimized_physical_plan = UnoptimizedPhysicalPlan()
         i = 0
         sql_queries = {t.identifier: t.sql() for t in database_state.virtual_tables}
@@ -391,6 +393,9 @@ class PlanConfigurator:
                     logger=logger / f"llm-configure-{i}",
                 )
                 if mistake is not None:
+                    num_mistakes += 1
+                    if num_mistakes >= MAX_CONFIGURE_RETRIES:
+                        raise mistake
                     continue
 
             physical_step = configuration_state.physical_steps[i]
@@ -429,6 +434,7 @@ class PlanConfigurator:
             logger.info(__name__, observation_str)
             i += 1
             prompt = mistake = response = None
+            num_mistakes = 0
         return unoptimized_physical_plan
 
     async def llm_configure_single_step(

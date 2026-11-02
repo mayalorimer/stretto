@@ -540,10 +540,12 @@ def main():
     args = parser.parse_args()
 
     with monitor_session(args, output_dir=args.output_dir, script="run_benchmark_single_operator.py"):
-        _run(args)
+        _run(args, parser)
 
 
-def _run(args):
+def _run(args, parser=None):
+    if parser is None:
+        parser = argparse.ArgumentParser(prog="run_benchmark_single_operator.py")
 
     # Convert --sample percentage to an absolute row count using the known dataset length.
     # Resolved early so all downstream code just uses num_items (int or None).
@@ -643,11 +645,25 @@ def _run(args):
     # This includes both LogicalFilter and LogicalExtract operators
     from reasondb.query_plan.query import Queries as _Queries
 
-    need_ranges = args.range_filter is not None or args.range_extract is not None
+    need_ranges = (
+        args.range_filter is not None
+        or args.range_extract is not None
+        or args.range_join is not None
+    )
 
     if args.only_join:
         logger.info("Running only join operators")
-        queries = get_join_single_operator_queries(benchmark)
+        join_qs = list(get_join_single_operator_queries(benchmark))
+        if args.range_join:
+            s, e = args.range_join
+            join_qs = join_qs[s - 1 : e]
+            logger.info(
+                "Applying --range-join %d %d: %d join queries",
+                s,
+                e,
+                len(join_qs),
+            )
+        queries = _Queries(*join_qs)
         operator_mode = "join"
     elif need_ranges:
         # Build filter and extract lists independently so ranges can be applied separately.
