@@ -218,7 +218,7 @@ class LLMParameter:
             for v in value:
                 self.dtype.validate(v, database, table=table)
         else:
-            self.dtype.validate
+            self.dtype.validate(value, database, table=table)
 
     def for_prompt(
         self, logical_plan_step: LogicalPlanStep, database_state: "IntermediateState"
@@ -574,7 +574,10 @@ class LlmParameterTemplate:
                 assert table is None or table.table_name == table_name
                 result.append(VirtualColumnIdentifier(placeholder))
             else:
-                assert table is not None
+                if table is None:
+                    raise Mistake(
+                    f"Column {{{placeholder}}} in template {self.text} must include its table name, e.g. {{<table>.{placeholder}}}."
+                )
                 result.append(
                     VirtualColumnIdentifier(f"{table.table_name}.{placeholder}")
                 )
