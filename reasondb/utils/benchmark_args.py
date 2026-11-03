@@ -333,7 +333,7 @@ def add_single_operator_arguments(
         help="Fraction of dataset rows to use, expressed as a percentage (e.g. 50 = first 50%%). "
         "Changes the output directory to benchmark_results_{sample}pct/filter_stats.",
     )
-    add_query_range_arguments(parser, ["filter", "extract"])
+    add_query_range_arguments(parser, ["filter", "extract", "join"])
 
 
 def add_monitor_arguments(parser: argparse.ArgumentParser) -> None:

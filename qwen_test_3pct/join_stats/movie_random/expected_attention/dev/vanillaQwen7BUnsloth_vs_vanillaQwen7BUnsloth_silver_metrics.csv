@@ -1,0 +1,4 @@
+approach_name,query,precision,recall,f1_score,execution_cost_runtime,tuning_cost_runtime,total_cost_runtime,execution_cost_monetary,tuning_cost_monetary,total_cost_monetary,execution_cost_fake_cost,tuning_cost_fake_cost,total_cost_fake_cost
+vanillaQwen7BUnsloth,"reviews.reviewtext and reviews_other.reviewtext_other discuss movies of the same genre, where the genre is exactly one of action, comedy, drama, horror, romance, science fiction, thriller, documentary, animation or other",1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+vanillaQwen7BUnsloth,"reviews.reviewtext and reviews_other.reviewtext_other have contradicting opinions, one clearly positive and the other clearly negative",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+vanillaQwen7BUnsloth,reviews.reviewtext and reviews_other.reviewtext_other both praise the direction or the director's work,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0

@@ -1,0 +1,80 @@
+{
+    "reviewsreviewtext_and_reviews_otherreviewtext_other_discuss_movies_of_the_same_genre_where_the_genre_is_exactly_one_of_action_comedy_drama_horror_romance_science_fiction_thriller_documentary_animation_or_other-": {
+        "cost": {
+            "execution_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "tuning_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "component_times": {
+                "configuring": 18.986052376999965,
+                "tuning": 1.008021347999943,
+                "execution": 0.002447151000069425,
+                "end_to_end": 20.802945747999956
+            },
+            "n_labels_requested": 0,
+            "guarantee": {}
+        },
+        "pipelines": [
+            "[\n    {\n        \"operator\": \"Rename\",\n        \"operator_config\": {\n            \"column\": \"reviews.reviewtext\",\n            \"new_name\": \"reviewtext_other\",\n            \"__expression__\": \"Rename {reviews.reviewtext} to [reviewtext_other]\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"reviews_other\"\n    },\n    {\n        \"operator\": \"TraditionalJoin\",\n        \"operator_config\": {\n            \"join_condition\": \"{reviews.reviewtext} LIKE '%action%' AND {reviews_other.reviewtext_other} LIKE '%action%' OR {reviews.reviewtext} LIKE '%comedy%' AND {reviews_other.reviewtext_other} LIKE '%comedy%' OR {reviews.reviewtext} LIKE '%drama%' AND {reviews_other.reviewtext_other} LIKE '%drama%' OR {reviews.reviewtext} LIKE '%horror%' AND {reviews_other.reviewtext_other} LIKE '%horror%' OR {reviews.reviewtext} LIKE '%romance%' AND {reviews_other.reviewtext_other} LIKE '%romance%' OR {reviews.reviewtext} LIKE '%science fiction%' AND {reviews_other.reviewtext_other} LIKE '%science fiction%' OR {reviews.reviewtext} LIKE '%thriller%' AND {reviews_other.reviewtext_other} LIKE '%thriller%' OR {reviews.reviewtext} LIKE '%documentary%' AND {reviews_other.reviewtext_other} LIKE '%documentary%' OR {reviews.reviewtext} LIKE '%animation%' AND {reviews_other.reviewtext_other} LIKE '%animation%' OR {reviews.reviewtext} LIKE '%other%' AND {reviews_other.reviewtext_other} LIKE '%other%'\",\n            \"join_type\": \"inner\",\n            \"__expression__\": \"reviews.reviewtext and reviews_other.reviewtext_other discuss movies of the same genre, where the genre is exactly one of action, comedy, drama, horror, romance, science fiction, thriller, documentary, animation or other\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\",\n            \"reviews_other\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+        ],
+        "data_filepath": "qwen_test_3pct/join_stats/movie_random/expected_attention/dev/cache/vanillaQwen7BUnsloth/vanillaQwen7BUnsloth_900964c1da7b828356472432d394c46cb4a503f95b3dc301a7bc108931c795d1.parquet"
+    },
+    "reviewsreviewtext_and_reviews_otherreviewtext_other_have_contradicting_opinions_one_clearly_positive_and_the_other_clearly_negative-": {
+        "cost": {
+            "execution_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "tuning_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "component_times": {
+                "configuring": 9.728836113870443,
+                "tuning": 0.18907868500002678,
+                "execution": 0.0011215750000701519,
+                "end_to_end": 10.824528919870431
+            },
+            "n_labels_requested": 0,
+            "guarantee": {}
+        },
+        "pipelines": [
+            "[\n    {\n        \"operator\": \"Rename\",\n        \"operator_config\": {\n            \"column\": \"reviews.reviewtext\",\n            \"new_name\": \"reviewtext_other\",\n            \"__expression__\": \"Rename {reviews.reviewtext} to [reviewtext_other]\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"reviews_other\"\n    },\n    {\n        \"operator\": \"TraditionalJoin\",\n        \"operator_config\": {\n            \"join_condition\": \"({reviews.reviewtext} LIKE '%positive%' AND {reviews_other.reviewtext_other} LIKE '%negative%') OR ({reviews.reviewtext} LIKE '%negative%' AND {reviews_other.reviewtext_other} LIKE '%positive%')\",\n            \"join_type\": \"inner\",\n            \"__expression__\": \"reviews.reviewtext and reviews_other.reviewtext_other have contradicting opinions, one clearly positive and the other clearly negative\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\",\n            \"reviews_other\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+        ],
+        "data_filepath": "qwen_test_3pct/join_stats/movie_random/expected_attention/dev/cache/vanillaQwen7BUnsloth/vanillaQwen7BUnsloth_230fa031df4af2c81ce7d2215d91a96a337f49b4d2a4f722c6e2ee9d33665db5.parquet"
+    },
+    "reviewsreviewtext_and_reviews_otherreviewtext_other_both_praise_the_direction_or_the_directors_work-": {
+        "cost": {
+            "execution_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "tuning_cost": {
+                "runtime": 0.0,
+                "monetary_cost": 0.0,
+                "fake_cost": 0.0
+            },
+            "component_times": {
+                "configuring": 7.9615197788705245,
+                "tuning": 0.2993016570000009,
+                "execution": 0.0013373150000006717,
+                "end_to_end": 8.865445110870496
+            },
+            "n_labels_requested": 0,
+            "guarantee": {}
+        },
+        "pipelines": [
+            "[\n    {\n        \"operator\": \"Rename\",\n        \"operator_config\": {\n            \"column\": \"reviews.reviewtext\",\n            \"new_name\": \"reviewtext_other\",\n            \"__expression__\": \"Rename {reviews.reviewtext} to [reviewtext_other]\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\"\n        ],\n        \"output\": \"reviews_other\"\n    },\n    {\n        \"operator\": \"TraditionalJoin\",\n        \"operator_config\": {\n            \"join_condition\": \"{reviews.reviewtext} LIKE '%direction%' OR {reviews.reviewtext} LIKE '%director%' AND {reviews_other.reviewtext_other} LIKE '%direction%' OR {reviews_other.reviewtext_other} LIKE '%director%'\",\n            \"join_type\": \"inner\",\n            \"__expression__\": \"reviews.reviewtext and reviews_other.reviewtext_other both praise the direction or the director's work\"\n        },\n        \"tuning_parameters\": {},\n        \"inputs\": [\n            \"reviews\",\n            \"reviews_other\"\n        ],\n        \"output\": \"output\"\n    }\n]"
+        ],
+        "data_filepath": "qwen_test_3pct/join_stats/movie_random/expected_attention/dev/cache/vanillaQwen7BUnsloth/vanillaQwen7BUnsloth_49ae50124dd733538c2389966f60a3a0b71632221c2ef74cb283b03421662390.parquet"
+    }
+}

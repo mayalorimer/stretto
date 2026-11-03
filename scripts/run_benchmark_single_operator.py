@@ -645,10 +645,24 @@ def _run(args):
 
     need_ranges = args.range_filter is not None or args.range_extract is not None
 
+    ## Added for join range flags
     if args.only_join:
-        logger.info("Running only join operators")
-        queries = get_join_single_operator_queries(benchmark)
-        operator_mode = "join"
+      logger.info("Running only join operators")
+      join_qs = list(get_join_single_operator_queries(benchmark))
+
+      if args.range_join:
+          s, e = args.range_join
+          join_qs = join_qs[s - 1 : e]
+          logger.info(
+              "Applying --range-join %d %d: %d join queries",
+              s,
+              e,
+              len(join_qs),
+          )
+  
+      queries = _Queries(*join_qs)
+      operator_mode = "join"
+      ##
     elif need_ranges:
         # Build filter and extract lists independently so ranges can be applied separately.
         filter_qs = list(benchmark.single_filter_queries)
