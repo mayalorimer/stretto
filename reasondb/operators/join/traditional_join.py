@@ -23,7 +23,7 @@ from reasondb.query_plan.llm_parameters import (
     LLMParameterValueDtype,
     PhysicalOperatorInterface,
 )
-from reasondb.query_plan.logical_plan import LogicalPlanStep, LogicalJoin
+from reasondb.query_plan.logical_plan import CARTESIAN_PRODUCT_EXPRESSION, LogicalPlanStep, LogicalJoin
 from reasondb.query_plan.physical_operator import (
     PhysicalOperator,
     ProfilingCost,
@@ -53,6 +53,10 @@ class TraditionalJoin(PhysicalOperator):
         join_type: Literal["inner", "left", "right", "full"] = llm_parameters[
             "join_type"
         ]
+        if logical_plan_step.expression == CARTESIAN_PRODUCT_EXPRESSION:
+            # Cross product of a rewritten semantic join: never use the LLM's condition.
+            join_cond = LlmParameterTemplate("1 = 1")
+            join_type = "inner"
 
         assert len(inputs) == 2
 
@@ -138,11 +142,12 @@ class TraditionalJoin(PhysicalOperator):
                     "join_condition",
                     LLMParameterTemplateDtype(
                         template_name="SQLite Condition Template",
-                        num_placeholders="+",
+                        num_placeholders="*",
                         dtypes=DataTypes.ALL,
                     ),
                     explanation="The join condition. Use SQLite syntax for the condition, but surround columns with {}. "
                     "Available operators: =, !=, >, <, >=, ... .For instance: {table1.column1} = {table2.column2} or {table1.column1} > 5. "
+                    "For a cartesian product (a condition that is always true), use 1 = 1. "
                     "Avoid using words like equals, greater than, etc. Instead, use the corresponding symbols.",
                     optional=False,
                     multiple=False,

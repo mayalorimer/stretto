@@ -359,12 +359,12 @@ MOVIE_OPERATOR_OPTIONS = [
 def _make_join_query(expression: str) -> Query:
     expression = re.sub(
         r"{\:0:\.([a-z_][a-z0-9_]*)}",
-        r"reviews.\1",
+        r"{reviews.\1}",
         expression,
     )
     expression = re.sub(
         r"{\:1:\.([a-z_][a-z0-9_]*)}",
-        r"reviews_other.\1",
+        r"{reviews_other.\1}",
         expression,
     )
     return Query(

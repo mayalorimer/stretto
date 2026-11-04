@@ -37,6 +37,7 @@ if TYPE_CHECKING:
 DUMMY_SELECTIVITY_FILTER = 0.5
 DUMMY_SELECTIVITY_JOIN = 1.0
 DUMMY_SELECTIVITY_GROUPBY = 0.5
+CARTESIAN_PRODUCT_EXPRESSION = "We need to do a cartesian product - i.e. use exactly the join condition 1 = 1. Do not try to match rows here: the matching is done by the next step."
 
 
 class LogicalOperatorToolbox:
@@ -559,7 +560,7 @@ class LogicalJoin(LogicalPlanStep):
                     explanation="We need to do a cartesian product - i.e. use a join condition that is always true",
                     inputs=list(self.inputs),
                     output=self.output,
-                    expression="We need to do a cartesian product - i.e. use a join condition that is always true",
+                    expression=CARTESIAN_PRODUCT_EXPRESSION,
                     labels=None,
                 ),
                 LogicalFilter(
