@@ -45,8 +45,8 @@ from reasondb.reasoning.observation import (
 from reasondb.utils.logging import FileLogger
 from reasondb.backends.text_embeddings import TextSimilarityBackend
 
-DEFAULT_THRESHOLD_LOWER = 0.0
-DEFAULT_THRESHOLD_UPPER = 0.0
+DEFAULT_THRESHOLD_LOWER = 0.9
+DEFAULT_THRESHOLD_UPPER = 0.9
 INITIAL_THRESHOLD_LOWER = -1.0
 INITIAL_THRESHOLD_UPPER = 1.0
 THRESHOLD_RANGE = (-10.0, 10.0)
