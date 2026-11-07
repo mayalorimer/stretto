@@ -70,6 +70,13 @@ MODEL_SPECS = {
         "family": "qwen",
         "size_class": "small",
     },
+    "qwen5B": {
+        "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+        "port": 5038,
+        "method_prefix": "kvQwen5B",
+        "family": "qwen",
+        "size_class": "small",
+    },
     # Vision-language (VL) models — served by kv_cache_image_qa_server.py, not the
     # text server. LLaVA uses ports 5008/5009; the other VL models are even-spaced
     # from 5040 like the text families above.

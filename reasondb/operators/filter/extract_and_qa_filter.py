@@ -393,10 +393,8 @@ class ExtractAndQaFilter(PhysicalOperator):
             f"ExtractAndQaFilter: direct LLM match evaluation "
             f"({len(match_questions)} unique questions) starting...",
         )
-        match_results, runtime3, cost3 = await self.text_qa_backend.run_direct(
+        match_results, runtime3, cost3 = await self._run_match_questions(
             questions=match_questions,
-            contexts=[""] * len(match_questions),
-            boolean_question=True,
             logger=logger / "match",
         )
         logger.info(
@@ -440,6 +438,18 @@ class ExtractAndQaFilter(PhysicalOperator):
             mask,
             ProfilingCost(runtime=runtime, monetary_cost=cost),
             input_data=input_data,
+        )
+
+    async def _run_match_questions(
+        self,
+        questions: Sequence[str],
+        logger: FileLogger,
+    ):
+        return await self.text_qa_backend.run_direct(
+            questions=list(questions),
+            contexts=[""] * len(questions),
+            boolean_question=True,
+            logger=logger,
         )
 
     # ------------------------------------------------------------------

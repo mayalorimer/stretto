@@ -60,6 +60,7 @@ from reasondb.operators.filter.image_qa_filter import ImageQaFilter
 from reasondb.operators.filter.text_qa_filter import TextQaFilter
 from reasondb.operators.filter.extract_and_match import ExtractAndMatchFilter
 from reasondb.operators.filter.extract_and_qa_filter import ExtractAndQaFilter
+from reasondb.operators.filter.extract_and_decision_filter import ExtractAndDecisionFilter
 from reasondb.operators.filter.extract_and_match_image import ExtractAndMatchImageFilter
 from reasondb.operators.filter.extract_and_qa_image import ExtractAndQaImageFilter
 from reasondb.operators.filter.image_qa_join_filter import ImageQaJoinFilter
@@ -447,8 +448,8 @@ def make_vanilla_configurator(model_name: str):
         physical_operators=PhysicalOperatorToolbox(
             join_operators=[TraditionalJoin(quality=1, fake_cost=0), QaFilterJoin()],
             join_predicates=[
-                ExtractAndMatchFilter(kvtextqa_vanilla, text_similarity_backend, fake_cost=vanilla_cost, quality=4),
-                ExtractAndQaFilter(kvtextqa_vanilla, fake_cost=vanilla_cost, quality=5),
+                ExtractAndMatchFilter(kvtextqa_vanilla, text_similarity_backend, fake_cost=vanilla_cost, quality=5),
+                ExtractAndQaFilter(kvtextqa_vanilla, fake_cost=vanilla_cost, quality=4),
             ],
             filter_operators=[
                 TraditionalFilter(quality=0, fake_cost=0),
@@ -470,6 +471,80 @@ def make_vanilla_configurator(model_name: str):
         ),
     )
     return configurator
+
+
+def _make_decision_configurator(extraction_model_key: str, extract_pairs: bool):
+    """Decision configurator using d3-lite for decision or extract+decision joins.
+
+    Uses the selected Qwen model for extraction when extract_pairs is enabled.
+    """
+    from reasondb.config.model_registry import ModelRegistry
+    from reasondb.backends.decision_model_text_qa import DecisionModelTextQABackend
+
+    registry = ModelRegistry.get()
+    spec = registry.spec_by_key(extraction_model_key)
+    extraction_backend = KvTextQABackend(
+        spec.model_name,
+        effective_compression_ratio=0.0,
+        materialized_compression_ratio=0.0,
+    )
+    decision_backend = DecisionModelTextQABackend()
+    cost = registry.cost_for(0.0, spec.size_class)
+    if extract_pairs:
+        join_predicates = [
+            ExtractAndDecisionFilter(
+                extraction_backend,
+                decision_backend,
+                fake_cost=cost,
+                quality=6,
+            )
+        ]
+    else:
+        join_predicates = [
+            TextQaFilter(
+                decision_backend,
+                quality=6,
+                fake_cost=0,
+            )
+        ]
+    return PlanConfigurator(
+        llm=GPT4o(),
+        physical_operators=PhysicalOperatorToolbox(
+            join_operators=[TraditionalJoin(quality=1, fake_cost=0), QaFilterJoin()],
+            join_predicates=join_predicates,
+            filter_operators=[
+                TraditionalFilter(quality=0, fake_cost=0),
+                TextQaFilter(extraction_backend, quality=15, fake_cost=cost),
+            ],
+            extract_operators=[
+                TextQaExtract(extraction_backend, quality=5, fake_cost=cost),
+                PythonExtract(LLMPythonCodegenBackend(GPT4o()), quality=2, fake_cost=0),
+            ],
+            transform_operators=[
+                PythonTransform(LLMPythonCodegenBackend(GPT4o()), quality=2, fake_cost=0)
+            ],
+            limit_operators=[Limit(quality=1, fake_cost=0)],
+            project_operators=[Project(quality=1, fake_cost=0)],
+            sorting_operators=[Sort(quality=1, fake_cost=0)],
+            groupby_operators=[GroupBy(quality=1, fake_cost=0)],
+            aggregate_operators=[Aggregate(quality=1, fake_cost=0)],
+            rename_operators=[Rename(quality=1, fake_cost=0)],
+        ),
+    )
+
+
+def make_decision_only_configurator(extraction_model_key: str = "qwen3B"):
+    return _make_decision_configurator(
+        extraction_model_key=extraction_model_key,
+        extract_pairs=False,
+    )
+
+
+def make_extract_decision_configurator(extraction_model_key: str = "qwen3B"):
+    return _make_decision_configurator(
+        extraction_model_key=extraction_model_key,
+        extract_pairs=True,
+    )
 
 
 def make_api_configurator(model):
@@ -540,10 +615,10 @@ def main():
     args = parser.parse_args()
 
     with monitor_session(args, output_dir=args.output_dir, script="run_benchmark_single_operator.py"):
-        _run(args)
+        _run(args, parser)
 
 
-def _run(args):
+def _run(args, parser):
 
     # Convert --sample percentage to an absolute row count using the known dataset length.
     # Resolved early so all downstream code just uses num_items (int or None).
@@ -724,9 +799,13 @@ def _run(args):
         _vanilla_name = "vanilla" + _spec.method_prefix.removeprefix("kv")
         method_configurators[_vanilla_name] = make_vanilla_configurator(_spec.model_name)
 
-    # Direct API variants: text-only operators backed by the requested OpenAI model.
+    # Direct API variants: text-only operators backed by the requested OpenAI model
     method_configurators["api-ref"] = make_api_configurator(GPT54Mini())
     method_configurators["api-test"] = make_api_configurator(GPT54Nano())
+
+    # Decision model variants: one for decision-only joins, one for extract+decision joins
+    method_configurators["dec"] = make_decision_only_configurator("qwen3B")
+    method_configurators["x-dec"] = make_extract_decision_configurator("qwen3B")
     
     # Collect predictions from KV-cache methods
     all_predictions = {}
