@@ -47,7 +47,8 @@ class DecisionModelTextQABackend(TextQaBackend):
             raise RuntimeError("Decision model backend is not set up.")
 
     async def wind_down(self):
-        self.model = None
+        # Keep the model loaded because one executor can process multiple queries.
+        pass
 
     async def run(
         self,
