@@ -70,18 +70,22 @@ class DecisionModelTextQABackend(TextQaBackend):
                 {col: values[col.column_name] for col in placeholders}
             )
 
+        # Dynamically identify index tracking columns to make sure they are part of grouping/preservation
+        index_cols = [c for c in data.columns if c.startswith('_index_')]
+        
         pair_to_indices = group_rows_by_question_and_context(
             data,
             context_column_virtual.column_name,
-            [col.column_name for col in placeholders],
+            [col.column_name for col in placeholders] + index_cols,
             fill,
         )
         responses, runtime, cost = await self._run_unique(
-            list(pair_to_indices),
+            list((q, c) for (q, c, *_) in pair_to_indices.keys())
         )
         results: List[Optional[Tuple[Sequence[int], Any, float]]] = [None] * len(data)
-        for pair, entries in pair_to_indices.items():
-            _answer, log_odds, pair_runtime = responses[pair]
+        for key_tuple, entries in pair_to_indices.items():
+            q, c = key_tuple[0], key_tuple[1]
+            _answer, log_odds, pair_runtime = responses[(q, c)]
             for position, data_id in entries:
                 results[position] = (data_id, log_odds, pair_runtime)
         return [result for result in results if result is not None], runtime, cost
