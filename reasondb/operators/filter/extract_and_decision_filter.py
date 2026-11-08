@@ -16,11 +16,15 @@ class ExtractAndDecisionFilter(ExtractAndQaFilter):
         decision_backend: TextQaBackend,
         quality: float,
         fake_cost: float,
+        threshold_lower: float = 0.0,
+        threshold_upper: float = 0.0,
     ):
         super().__init__(
             text_qa_backend=extraction_backend,
             quality=quality,
             fake_cost=fake_cost,
+            threshold_lower=threshold_lower,
+            threshold_upper=threshold_upper,
         )
         self.decision_backend = decision_backend
 

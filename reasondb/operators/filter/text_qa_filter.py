@@ -57,8 +57,12 @@ class TextQaFilter(PhysicalOperator):
         text_qa_backend: TextQaBackend,
         quality: float,
         fake_cost: float,
+        threshold_lower: float = DEFAULT_THRESHOLD_LOWER,
+        threshold_upper: float = DEFAULT_THRESHOLD_UPPER,
     ):
         self.text_qa_backend = text_qa_backend
+        self.threshold_lower = threshold_lower
+        self.threshold_upper = threshold_upper
         self.batch_size = 5
         self.mode = None
         super().__init__(quality=quality, fake_cost=fake_cost)
@@ -373,7 +377,7 @@ class TextQaFilter(PhysicalOperator):
             [
                 TuningParameterContinuous(
                     name="logodds_threshold_lower",
-                    default=DEFAULT_THRESHOLD_LOWER,
+                    default=self.threshold_lower,
                     init=INITIAL_THRESHOLD_LOWER,
                     min=THRESHOLD_RANGE[0],
                     max=THRESHOLD_RANGE[1],
@@ -381,7 +385,7 @@ class TextQaFilter(PhysicalOperator):
                 ),
                 TuningParameterContinuous(
                     name="logodds_threshold_upper",
-                    default=DEFAULT_THRESHOLD_UPPER,
+                    default=self.threshold_upper,
                     init=INITIAL_THRESHOLD_UPPER,
                     min=THRESHOLD_RANGE[0],
                     max=THRESHOLD_RANGE[1],

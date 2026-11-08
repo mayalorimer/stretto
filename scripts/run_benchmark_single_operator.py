@@ -497,6 +497,8 @@ def _make_decision_configurator(extraction_model_key: str, extract_pairs: bool):
                 decision_backend,
                 fake_cost=cost,
                 quality=6,
+                threshold_lower=1.0,
+                threshold_upper=1.0,
             )
         ]
     else:
@@ -505,6 +507,8 @@ def _make_decision_configurator(extraction_model_key: str, extract_pairs: bool):
                 decision_backend,
                 quality=6,
                 fake_cost=0,
+                threshold_lower=1.0,
+                threshold_upper=1.0,
             )
         ]
     return PlanConfigurator(
