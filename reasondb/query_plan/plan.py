@@ -159,6 +159,12 @@ class PlanStep(ABC):
         result = []
         for input_tbl in self.inputs:
             for index_col in database_state.get_virtual_table(input_tbl).index_columns:
+                index_col = IndexColumn(
+                    orig_table=index_col.orig_table,
+                    renamed_table=index_col.renamed_table,
+                    materialized_table=index_col.materialized_table,
+                    origin=index_col.origin,
+                )
                 for prev in result:
                     if prev.col_name == index_col.col_name:
                         prev.renamed_table = prev.orig_table + "_left"
