@@ -448,8 +448,8 @@ def make_vanilla_configurator(model_name: str):
         physical_operators=PhysicalOperatorToolbox(
             join_operators=[TraditionalJoin(quality=1, fake_cost=0), QaFilterJoin()],
             join_predicates=[
-                ExtractAndMatchFilter(kvtextqa_vanilla, text_similarity_backend, fake_cost=vanilla_cost, quality=5),
-                ExtractAndQaFilter(kvtextqa_vanilla, fake_cost=vanilla_cost, quality=4),
+                ExtractAndMatchFilter(kvtextqa_vanilla, text_similarity_backend, fake_cost=vanilla_cost, quality=4),
+                ExtractAndQaFilter(kvtextqa_vanilla, fake_cost=vanilla_cost, quality=5),
             ],
             filter_operators=[
                 TraditionalFilter(quality=0, fake_cost=0),
