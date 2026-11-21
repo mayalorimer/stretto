@@ -474,7 +474,7 @@ def make_vanilla_configurator(model_name: str):
 
 
 def _make_decision_configurator(extraction_model_key: str, extract_pairs: bool):
-    """Decision configurator using d3-nano for decision or extract+decision joins.
+    """Decision configurator using d3-lite for decision or extract+decision joins.
 
     Uses the selected Qwen model for extraction when extract_pairs is enabled.
     """

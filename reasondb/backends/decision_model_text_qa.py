@@ -1,4 +1,4 @@
-"""Text-QA backend for local d3-nano decision-model inference."""
+"""Text-QA backend for local d3-lite decision-model inference."""
 
 import math
 import time
@@ -20,9 +20,9 @@ from reasondb.utils.logging import FileLogger
 
 
 class DecisionModelTextQABackend(TextQaBackend):
-    """Run yes/no questions with the local ``vllm-sr/d3-nano`` model."""
+    """Run yes/no questions with the local ``vllm-sr/d3-lite`` model."""
 
-    def __init__(self, model_name: str = "vllm-sr/d3-nano"):
+    def __init__(self, model_name: str = "vllm-sr/d3-lite"):
         self.model_name = model_name
         self.model: Optional[Any] = None
 
@@ -145,9 +145,9 @@ class DecisionModelTextQABackend(TextQaBackend):
         )
         probability = result["answers"]["decision"]["noul"]
         if not isinstance(probability, (int, float)):
-            raise ValueError("d3-nano decision answer must be numeric.")
+            raise ValueError("d3-lite decision answer must be numeric.")
         if not 0.0 <= probability <= 1.0:
-            raise ValueError("d3-nano decision probability must be between 0 and 1.")
+            raise ValueError("d3-lite decision probability must be between 0 and 1.")
 
         probability = min(max(float(probability), 1e-6), 1.0 - 1e-6)
         log_odds = math.log(probability / (1.0 - probability))
