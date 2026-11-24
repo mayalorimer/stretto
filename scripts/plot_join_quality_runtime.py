@@ -26,6 +26,18 @@ parser.add_argument(
     default=None,
     help="Optional number of queries per panel. If omitted, all queries use one plot.",
 )
+parser.add_argument(
+    "--paired-output",
+    type=Path,
+    default=None,
+    help="Defaults to <results-dir>/join_quality_by_query.png.",
+)
+parser.add_argument(
+    "--paired-layout",
+    choices=("combined", "small-multiple"),
+    default="combined",
+    help="How to arrange the by-query plot.",
+)
 args = parser.parse_args()
 
 plt.rcParams.update(
@@ -47,6 +59,7 @@ plt.rcParams.update(
 
 root = args.results_dir / "join_stats"
 output = args.output or args.results_dir / "join_quality_runtime_panels.png"
+paired_output = args.paired_output or args.results_dir / "join_quality_by_query.png"
 
 if not root.exists():
     raise SystemExit(f"No join_stats directory found at {root}")
@@ -151,14 +164,11 @@ for csv_path in root.rglob("*_metrics.csv"):
 if not rows:
     raise SystemExit(f"No usable metrics CSV files found below {root}")
 
-data = pd.DataFrame(rows)
+summary = pd.DataFrame(rows)
 
 METHOD_DISPLAY_NAMES = {
-    "x-dec": "extract&decision",
+    "x-dec": "extract&decision (Qwen-3B/d3-lite)",
 }
-
-# Keep each query point separate; each method becomes a line across its queries.
-summary = data.copy()
 
 panels = list(dict.fromkeys(summary["panel"]))
 methods = list(dict.fromkeys(summary["method"]))
@@ -181,6 +191,30 @@ method_colors = {
 for index, method in enumerate(methods):
     if method_colors[method] is None:
         method_colors[method] = colors[index % len(colors)]
+
+
+def method_rows(method):
+    return (
+        summary[summary["method"] == method]
+        .sort_values("query_number")
+        .drop_duplicates("query_number")
+    )
+
+
+def clean_axis(ax):
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+
+def add_grid(ax, axis="y"):
+    ax.grid(
+        True,
+        axis=axis,
+        linestyle="--",
+        linewidth=0.5,
+        alpha=0.5,
+        zorder=1,
+    )
 
 fig, axes = plt.subplots(
     1,
@@ -260,10 +294,9 @@ for ax, panel in zip(axes, panels):
         ax.set_xlim(x_min * 0.65, x_max * 1.45)
     ax.set_ylim(-0.08, 1.08)
 
-    ax.grid(True, which="major", linestyle="--", linewidth=0.5, alpha=0.5, zorder=1)
+    add_grid(ax, axis="both")
     ax.grid(True, which="minor", linestyle=":", linewidth=0.4, alpha=0.35, zorder=1)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
+    clean_axis(ax)
     ax.tick_params(labelsize=9)
 
 axes[0].set_ylabel("Avg F1 Score", fontsize=10)
@@ -295,3 +328,199 @@ fig.subplots_adjust(left=0.08, right=0.98, bottom=0.18, top=0.88, wspace=0.15)
 output.parent.mkdir(parents=True, exist_ok=True)
 fig.savefig(output, dpi=300, bbox_inches="tight")
 print(f"Saved plot to {output}")
+
+# By-query view: put every model/query result together or split by query.
+query_numbers = sorted(summary["query_number"].unique())
+
+query_markers = ("o", "s", "^", "D", "P", "X", "v", "<", ">", "h", "*")
+query_markers_by_number = {
+    query_number: query_markers[index % len(query_markers)]
+    for index, query_number in enumerate(query_numbers)
+}
+model_cmap = plt.cm.tab10 if len(methods) <= 10 else plt.cm.tab20
+method_colors = {
+    method: model_cmap(index % model_cmap.N)
+    for index, method in enumerate(methods)
+}
+
+if args.paired_layout == "combined":
+    fig_paired, ax = plt.subplots(
+        1,
+        1,
+        figsize=(10.5, 6.8),
+    )
+
+    runtimes = []
+    for method in methods:
+        display_method = METHOD_DISPLAY_NAMES.get(method, method)
+        for query_number in query_numbers:
+            row = summary[
+                (summary["method"] == method)
+                & (summary["query_number"] == query_number)
+            ]
+            if row.empty:
+                continue
+            runtime = float(row.iloc[0]["runtime_sec"])
+            f1 = float(row.iloc[0]["f1_score"])
+            runtimes.append(runtime)
+            ax.scatter(
+                runtime,
+                f1,
+                color=method_colors[method],
+                marker=query_markers_by_number[query_number],
+                s=95,
+                edgecolor="white",
+                linewidth=0.8,
+                zorder=3,
+            )
+    ax.set_xscale("log")
+    ax.xaxis.set_major_formatter(
+        ticker.FuncFormatter(lambda value, _: f"{value:g}")
+    )
+    ax.xaxis.set_minor_formatter(ticker.NullFormatter())
+    ax.set_xlabel("Runtime (sec., log scale)")
+    ax.set_ylabel("F1 score")
+    ax.set_ylim(-0.08, 1.08)
+    if runtimes:
+        ax.set_xlim(
+            max(min(runtimes) * 0.65, 1e-6),
+            max(runtimes) * 1.45,
+        )
+    ax.set_title(
+        "F1 vs runtime: model color and query shape",
+        fontsize=13,
+        fontweight="bold",
+        pad=10,
+    )
+    add_grid(ax)
+    clean_axis(ax)
+
+    model_handles = [
+        plt.Line2D(
+            [0],
+            [0],
+            linestyle="none",
+            marker="o",
+            color=method_colors[method],
+            markerfacecolor=method_colors[method],
+            markeredgecolor="white",
+            markersize=8,
+            label=METHOD_DISPLAY_NAMES.get(method, method),
+        )
+        for method in methods
+    ]
+    query_handles = [
+        plt.Line2D(
+            [0],
+            [0],
+            linestyle="none",
+            marker=query_markers_by_number[query_number],
+            color="#333333",
+            markerfacecolor="#333333",
+            markeredgecolor="white",
+            markersize=8,
+            label=f"Q{int(query_number)}",
+        )
+        for query_number in query_numbers
+    ]
+    legend_model = ax.legend(
+        handles=model_handles,
+        title="Model",
+        loc="upper left",
+        bbox_to_anchor=(1.01, 1.0),
+        frameon=True,
+    )
+    ax.add_artist(legend_model)
+    ax.legend(
+        handles=query_handles,
+        title="Query",
+        loc="upper left",
+        bbox_to_anchor=(1.01, 0.55),
+        frameon=True,
+    )
+
+else:
+    n_queries = len(query_numbers)
+    ncols = min(3, n_queries)
+    nrows = (n_queries + ncols - 1) // ncols
+    fig_paired, axes_paired = plt.subplots(
+        nrows,
+        ncols,
+        figsize=(4.6 * ncols, 3.4 * nrows),
+        squeeze=False,
+        sharey=True,
+    )
+    labeled_methods = set()
+
+    for panel_index, query_number in enumerate(query_numbers):
+        row, col = divmod(panel_index, ncols)
+        ax = axes_paired[row][col]
+        query_data = summary[summary["query_number"] == query_number]
+        runtimes = []
+        for method in methods:
+            method_row = query_data[query_data["method"] == method]
+            if method_row.empty:
+                continue
+            f1 = float(method_row.iloc[0]["f1_score"])
+            runtime = float(method_row.iloc[0]["runtime_sec"])
+            runtimes.append(runtime)
+            display_method = METHOD_DISPLAY_NAMES.get(method, method)
+            ax.scatter(
+                runtime,
+                f1,
+                color=method_colors[method],
+                marker=method_styles.get(method, {}).get("marker", "o"),
+                s=100,
+                edgecolor="white",
+                linewidth=0.8,
+                zorder=3,
+                label=display_method
+                if display_method not in labeled_methods
+                else None,
+            )
+            if display_method not in labeled_methods:
+                labeled_methods.add(display_method)
+        ax.set_title(f"Q{int(query_number)}", fontsize=11, fontweight="bold")
+        ax.set_ylabel("F1 score")
+        ax.set_xlabel("Runtime (sec., log scale)")
+        ax.set_xscale("log")
+        ax.xaxis.set_major_formatter(
+            ticker.FuncFormatter(lambda value, _: f"{value:g}")
+        )
+        ax.xaxis.set_minor_formatter(ticker.NullFormatter())
+        ax.set_ylim(-0.08, 1.08)
+        if len(runtimes) > 1:
+            x_min = max(min(runtimes) * 0.65, 1e-6)
+            x_max = max(runtimes) * 1.45
+            ax.set_xlim(x_min, x_max)
+        clean_axis(ax)
+        add_grid(ax)
+
+    for panel_index in range(n_queries, nrows * ncols):
+        row, col = divmod(panel_index, ncols)
+        axes_paired[row][col].set_visible(False)
+
+    fig_paired.suptitle(
+        "F1 score vs runtime for each query",
+        fontsize=13,
+        fontweight="bold",
+    )
+    handles, labels = axes_paired[0][0].get_legend_handles_labels()
+    if handles:
+        fig_paired.legend(
+            handles,
+            labels,
+            title="Method",
+            loc="lower center",
+            bbox_to_anchor=(0.5, 0.01),
+            ncol=min(len(handles), 4),
+            frameon=True,
+        )
+
+if args.paired_layout == "combined":
+    fig_paired.subplots_adjust(left=0.08, right=0.68, bottom=0.12, top=0.88)
+else:
+    fig_paired.subplots_adjust(left=0.08, right=0.98, bottom=0.18, top=0.88)
+paired_output.parent.mkdir(parents=True, exist_ok=True)
+fig_paired.savefig(paired_output, dpi=300, bbox_inches="tight")
+print(f"Saved by-query plot to {paired_output}")
