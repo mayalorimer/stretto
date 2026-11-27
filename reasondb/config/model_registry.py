@@ -70,10 +70,24 @@ MODEL_SPECS = {
         "family": "qwen",
         "size_class": "small",
     },
-    "qwen5B": {
+    "qwen05B": {
         "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
         "port": 5038,
-        "method_prefix": "kvQwen5B",
+        "method_prefix": "kvQwen05B",
+        "family": "qwen",
+        "size_class": "small",
+    },
+    "qwen3_2B": {
+        "model_name": "Qwen/Qwen3.5-2B-Base",
+        "port": 5048,
+        "method_prefix": "kvQwen3_2B",
+        "family": "qwen",
+        "size_class": "small",
+    },
+    "qwen3_08B": {
+        "model_name": "Qwen/Qwen3.5-0.8B-Base",
+        "port": 5050,
+        "method_prefix": "kvQwen3_08B",
         "family": "qwen",
         "size_class": "small",
     },
