@@ -431,7 +431,7 @@ def get_gpt_configurator():
 
 
 
-def make_vanilla_configurator(model_name: str):
+def make_vanilla_configurator(model_name: str, join_strategy: str = "all"):
     """Vanilla configurator: full prefill at inference, no pre-generated KV caches.
 
     Sets vanilla=True so its cache is separate from the kv*00 method of the same model.
@@ -443,14 +443,30 @@ def make_vanilla_configurator(model_name: str):
         model_name, effective_compression_ratio=0.0, materialized_compression_ratio=0.0, vanilla=True
     )
     text_similarity_backend = TextSimilarityBackend("BAAI/bge-small-en-v1.5")
+    extract_match = ExtractAndMatchFilter(
+        kvtextqa_vanilla,
+        text_similarity_backend,
+        fake_cost=vanilla_cost,
+        quality=4,
+    )
+    extract_qa = ExtractAndQaFilter(
+        kvtextqa_vanilla,
+        fake_cost=vanilla_cost,
+        quality=5,
+    )
+    join_predicates = {
+        "all": [extract_match, extract_qa],
+        "extract-match": [extract_match],
+        "extract-qa": [extract_qa],
+    }.get(join_strategy)
+    if join_predicates is None:
+        raise ValueError(f"Unknown vanilla join strategy: {join_strategy}")
+
     configurator = PlanConfigurator(
         llm=GPT4o(),
         physical_operators=PhysicalOperatorToolbox(
             join_operators=[TraditionalJoin(quality=1, fake_cost=0), QaFilterJoin()],
-            join_predicates=[
-                ExtractAndMatchFilter(kvtextqa_vanilla, text_similarity_backend, fake_cost=vanilla_cost, quality=4),
-                ExtractAndQaFilter(kvtextqa_vanilla, fake_cost=vanilla_cost, quality=5),
-            ],
+            join_predicates=join_predicates,
             filter_operators=[
                 TraditionalFilter(quality=0, fake_cost=0),
                 TextQaFilter(kvtextqa_vanilla, quality=15, fake_cost=vanilla_cost),
@@ -802,6 +818,14 @@ def _run(args, parser):
         _spec = _registry.spec_by_key(_spec_key)
         _vanilla_name = "vanilla" + _spec.method_prefix.removeprefix("kv")
         method_configurators[_vanilla_name] = make_vanilla_configurator(_spec.model_name)
+        method_configurators[f"{_vanilla_name}-extract-match"] = make_vanilla_configurator(
+            _spec.model_name,
+            join_strategy="extract-match",
+        )
+        method_configurators[f"{_vanilla_name}-extract-qa"] = make_vanilla_configurator(
+            _spec.model_name,
+            join_strategy="extract-qa",
+        )
 
     # Direct API variants: text-only operators backed by the requested OpenAI model
     method_configurators["api-ref"] = make_api_configurator(GPT54Mini())
